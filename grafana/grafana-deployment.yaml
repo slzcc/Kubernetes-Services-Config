@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: cheese
+    task: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: grafana
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: grafana
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: mesos3
+      volumes:
+      - name: grafana-storage
+#        emptyDir: {}
+        hostPath:
+          path: "/data/grafana"
+#      hostNetwork: true
+      containers:
+      - name: grafana
+        image: registry.aliyuncs.com/slzcc/grafana
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        ports:
+        - containerPort: 3000
+          name: http
+          hostPort: 3000
+        volumeMounts:
+        - mountPath: /var
+          name: grafana-storage
+        env:
+        - name: PROMETHEUS_HOST
+          value: "101"
+        - name: GRAFANA_PORT
+          value: "3000"
+          # The following env variables are required to make Grafana accessible via
+          # the kubernetes api-server proxy. On production clusters, we recommend
+          # removing these env variables, setup auth for grafana, and expose the grafana
+          # service using a LoadBalancer or a public IP.
+      #  - name: GF_AUTH_BASIC_ENABLED
+      #    value: "false"
+      #  - name: GF_AUTH_ANONYMOUS_ENABLED
+      #    value: "true"
+      #  - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+      #    value: Admin
+      #  - name: GF_SERVER_ROOT_URL
+      #    # value: /api/v1/proxy/namespaces/kube-system/services/monitoring-grafana/
+      #    value: /
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: "Chengcheng"

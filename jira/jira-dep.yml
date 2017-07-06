@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jira
+  namespace: default
+  labels:
+    app: cheese
+    task: jira
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: jira
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: jira
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: elk
+      containers:
+      - name: jira
+        image: registry.aliyuncs.com/slzcc/jira:7.2.2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: out
+          containerPort: 8005
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+        volumeMounts:
+          - name: jira-data
+            mountPath: "/var/atlassian/application-data"
+      volumes:
+#      - name: jira-data
+#        persistentVolumeClaim:
+#          claimName: jira-data
+        - hostPath:
+            path: "/root/application-data"
+          name: jira-data
+      imagePullSecrets:
+        - name: myregistrykey

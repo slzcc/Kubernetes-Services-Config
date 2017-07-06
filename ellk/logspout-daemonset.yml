@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: logspout-elasticsearch
+#  namespace: kube-system
+  labels:
+    k8s-app: logspout-logging
+spec:
+  template:
+    metadata:
+      labels:
+        name: logspout-elasticsearch
+    spec:
+#      nodeSelector:
+#        role: elk
+      containers:
+      - name: logspout-elasticsearch
+        image: registry.aliyuncs.com/slzcc/logspout-logstash
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        env:
+          - name: "ROUTE_URIS"
+            value: "logstash+tcp://logstash:514"
+        volumeMounts:
+          - mountPath: "/var/run/docker.sock"
+            name: sock
+      volumes:
+        - hostPath:
+            path: "/var/run/docker.sock"
+          name: sock  
+      terminationGracePeriodSeconds: 30
+

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager
+data:
+  config.yml: |-
+         route:
+             receiver: 'slack'
+         receivers:
+             - name: 'slack'
+               slack_configs:
+                   - send_resolved: true
+                     username: 'Prometheus'
+                     channel: '#kubernetes'
+                     api_url: 'https://hooks.slack.com/services/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'

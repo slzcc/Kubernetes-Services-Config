@@ -1,0 +1,113 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cheese
+  namespace: default
+spec:
+  rules:
+  - host: www.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: wiki.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: alert.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: prom.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: grafana.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: http
+  - host: k8s.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: mirror.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: status.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: es.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: kibana.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: data.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: jira.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+  - host: traefik.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik-web-ui
+          servicePort: http

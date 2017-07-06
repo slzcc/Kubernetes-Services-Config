@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-mirror
+  namespace: default
+data:
+  default.conf: |-
+        server {
+                listen 80;
+                index index.php index.html index.htm;
+                location / {
+                        try_files $uri $uri/ /index.html;
+                        error_page  404 /var/data/logo/T/404.jpg;
+                        error_page  502 /var/data/logo/T/502.png;
+
+                        autoindex on;
+                        autoindex_exact_size off;
+                        autoindex_localtime on;
+                        root /mirror;
+                }
+
+                location /doc/ {
+                        alias /usr/share/doc/;
+                        autoindex on;
+                        allow 127.0.0.1;
+                        allow ::1;
+                        deny all;
+                }
+
+                error_page 500 502 503 504 /50x.html;
+                location = /50x.html {
+                        root /usr/share/nginx/html;
+                }
+
+
+                location ~ /\.ht {
+                        deny all;
+                }
+        }

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: lantern
+spec:
+  replicas: 1
+  selector:
+    app: lantern
+  template:
+    metadata:
+      labels:
+        app: lantern
+        kubernetes.io/cluster-service: "true"
+    spec:
+      containers:
+      - name: lantern
+        image: registry.aliyuncs.com/slzcc/lantern
+        ports:
+        - name: proxy
+          containerPort: 8787
+          hostPort: 8787
+      imagePullSecrets:
+        - name: myregistrykey

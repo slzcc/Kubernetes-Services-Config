@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginxplus-mirror-data
+  namespace: default
+data:
+  mirror-data.conf: |-
+        resolver 10.96.0.10 valid=1s;
+
+        upstream data {
+        zone upstrean-data 64k;
+        server  mirror-data.default.svc.cluster.local service=_http._tcp resolve;
+        }
+
+        ## mirror-data
+        server  {
+                        listen 80;
+                        status_zone mirror-data;
+                        server_name data.shileizcc.com;
+                        location  / {
+                        proxy_pass  http://data;
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header REMOTE-HOST $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        client_max_body_size 50m;
+                        client_body_buffer_size 256k;
+                        proxy_connect_timeout 30;
+                        proxy_send_timeout 30;
+                        proxy_read_timeout 60;
+                        proxy_buffer_size 256k;
+                        proxy_buffers 4 256k;
+                        proxy_busy_buffers_size 256k;
+                        proxy_temp_file_write_size 256k;
+                        proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+                        proxy_max_temp_file_size 128m;
+                        error_page  404 /var/data/logo/T/404.jpg;
+                        error_page  502 /var/data/logo/T/502.png;
+                }
+        }

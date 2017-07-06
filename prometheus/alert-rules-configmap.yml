@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alert.rules
+data:
+  alert.rules: |-
+           ALERT Node_Load_NO1
+             IF node_load1 > 1
+             FOR 30s
+             ANNOTATIONS {
+                 summary = "Instance {{ $labels.instance }} under high load",
+                 description = "{{ $labels.instance }} of job {{ $labels.job }} is under high load.",
+             }

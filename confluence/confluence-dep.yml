@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: confluence
+  namespace: default
+  labels:
+    app: cheese
+    task: confluence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: confluence
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: confluence
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: shileizcc.com
+      containers:
+      - name: confluence
+        image: registry.aliyuncs.com/slzcc/confluence-6.0.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8090
+        - name: out
+          containerPort: 8000
+        volumeMounts:
+          - mountPath: "/opt/altassian/confluence/data"
+            name: data
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+      imagePullSecrets:
+        - name: myregistrykey
+      volumes:
+        - hostPath:
+            path: "/var/data/opt/altassian/confluence/data"
+          name: data

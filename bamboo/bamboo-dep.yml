@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bamboo
+  namespace: default
+  labels:
+    app: cheese
+    task: bamboo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: bamboo
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: bamboo
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: elk
+      hostNetwork: true
+      containers:
+      - name: bamboo
+        image: registry.aliyuncs.com/slzcc/bamboo:6.0.3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8085
+        resources:
+          requests:
+            memory: "1300Mi"
+            cpu: "500m"
+          limits:
+            memory: "1300Mi"
+            cpu: "1000m"
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+        volumeMounts:
+          - name: bamboo-data
+            mountPath: "/var/atlassian/bamboo-home"
+      volumes:
+#      - name: bamboo-data
+#        persistentVolumeClaim:
+#          claimName: bamboo-data
+        - hostPath:
+            path: "/var/atlassian/bamboo-home"
+          name: bamboo-data
+      imagePullSecrets:
+        - name: myregistrykey

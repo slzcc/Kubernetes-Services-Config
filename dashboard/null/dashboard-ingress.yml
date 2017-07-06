@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dashboard
+  namespace: kube-system
+spec:
+  rules:
+  - host: k8s.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: dashboard
+          servicePort: http

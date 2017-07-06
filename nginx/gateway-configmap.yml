@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway
+  namespace: default
+data:
+  nginx.conf: |-
+    #server {
+    #        listen 80;
+    #        server_name www.shileizcc.com;
+    # rewrite  ^(.*) https://$server_name$1 permanent;
+    #        if ($host != '101.200.83.130')   {
+    #        rewrite ^(.*) https://$server_name$1 permanent;
+    #        }
+    #}
+    ## Server
+    server {
+    #   listen  443;
+    #        server_name www.shileizcc.com;
+    #   ssl on;
+    #   ssl_certificate     /etc/nginx/conf.d/www.shileizcc.com.crt;
+    #   ssl_certificate_key /etc/nginx/conf.d/www.shileizcc.com.key;
+    # proxy_set_header Host       $http_host;   # required for Docker client sake
+    # proxy_set_header X-Real-IP  $remote_addr; # pass on real client IP
+    # client_max_body_size 0; # disable any limits to avoid HTTP 413 for large image uploads
+    ##  required to avoid HTTP 411: see Issue #1486 (https://github.com/dotcloud/docker/issues/1486)
+    #        chunked_transfer_encoding on;
+
+    #        if ($host != 'www.shileizcc.com')   {
+    #         rewrite ^/(.*)$ https://www.shileizcc.com/$1 permanent;
+    #        }
+
+
+            error_page 403 403.html;
+            error_page 404 404.html;
+            error_page 502 502.html;
+
+            location / {
+            root    /usr/share/nginx/html;
+            index index.html  index.htm  index.php ;
+    # error_page 400 https://www.shileizcc.com/;
+    # error_page 404 https://www.shileizcc.com/;
+            }
+
+    #        location ~ \.php$ {
+    #                try_files $uri =404;
+    #                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    #                fastcgi_pass 127.0.0.1:9000;
+    #                fastcgi_pass unix:/var/run/php5-fpm.sock;
+    #                fastcgi_index index.php;
+    #                include fastcgi_params;
+    #        }
+    #     location ~ .*\.(gif|jpg|jpeg|bmp|png|swf|flv|rar|zip|gz|bz2)$ {
+    #     location ~* ^.+\.(gif|jpg|jpeg|bmp|png|swf|flv|rar|zip|gz|bz2)$ {
+    #   allow 127.0.0.1;
+    #   deny  all;
+    #         access_log off;
+    #       expires 10h;
+    #         valid_referers none blocked  server_names *.shileizcc.com;
+    #         if ($invalid_referer) {
+    #           return 403;
+    #         }
+    #        }
+
+    # location /status {
+    #   stub_status on;
+    #   access_log off;
+    #   error_page 403 = /var/data/logo/403.html;
+    #   error_page 404 = /var/data/logo/404.png;
+    #       allow 192.168.1.0/24;
+    #       allow 106.120.43.83;
+    #   allow 124.127.220.90;
+    #   allow 127.0.0.1;
+    #   allow 101.200.83.130;
+    #       deny all;
+    #                auth_basic                  "Please Input username/password";
+    #                auth_basic_user_file        status-password;
+    #        }
+            location /src {
+                    root /registry;
+      }
+            location ^~ /info.php {
+                    auth_basic                  "Please Input username/password";
+                    auth_basic_user_file        status-password;
+            }
+
+      location ^~ /.git {
+        return 444;
+      }
+
+    }

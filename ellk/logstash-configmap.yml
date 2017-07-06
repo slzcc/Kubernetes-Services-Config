@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash
+#  namespace: kube-system
+data:
+  logstash.conf: |-
+      input {
+        udp {
+        port => 514
+        type => logspout
+        codec => json
+        }
+        tcp {
+        port => 514
+        type => logspout
+        codec => json
+        }
+      }
+
+      filter {
+        if [type] == "logspout" {
+          grok {
+            match => { "message" => "%{SYSLOG5424PRI}%{NONNEGINT:ver} +(?:%{TIMESTAMP_ISO8601:ts}|-) +(?:%{HOSTNAME:containerid}|-) +(?:%    {NOTSPACE:containername}|-) +(?:%{NOTSPACE:proc}|-) +(?:%{WORD:msgid}|-) +(?:%{SYSLOG5424SD:sd}|-|) +%{GREEDYDATA:msg}" }
+          }
+          syslog_pri { }
+          date {
+              match => [ "syslog_timestamp", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss" ]
+          }
+          if !("_grokparsefailure" in [tags]) {
+              mutate {
+                replace => [ "@source_host", "%{syslog_hostname}" ]
+                replace => [ "@message", "%{syslog_message}" ]
+              }
+          }
+          mutate {
+            remove_field => [ "syslog_hostname", "syslog_message", "syslog_timestamp" ]
+          }
+        }
+        ruby {
+            init => "@kname = ['http_x_forwarded_for','time_local','request','status','body_bytes_sent','request_body','content_length','http_referer','http_user_agent','http_cookie','remote_addr','hostname','upstream_addr','upstream_response_time','request_time']"
+            code => "
+                new_event = LogStash::Event.new(Hash[@kname.zip(event.get('message').split('|'))])
+                new_event.remove('@timestamp')
+                event.append(new_event)
+            "
+        }
+        if [request] {
+            ruby {
+                init => "@kname = ['method','uri','verb']"
+                code => "
+                    new_event = LogStash::Event.new(Hash[@kname.zip(event.get('request').split(' '))])
+                    new_event.remove('@timestamp')
+                    event.append(new_event)
+                "
+            }
+            if [uri] {
+                ruby {
+                    init => "@kname = ['url_path','url_args']"
+                    code => "
+                        new_event = LogStash::Event.new(Hash[@kname.zip(event.get('uri').split('?'))])
+                        new_event.remove('@timestamp')
+                        event.append(new_event)
+                    "
+                }
+                kv {
+                    prefix => "url_"
+                    source => "url_args"
+                    field_split => "& "
+                    remove_field => [ "url_args","uri","request" ,"request_body"]
+                }
+            }
+        }
+        kv {
+            prefix => "http_cookie_"
+            source => "http_cookie"
+            field_split => "; "
+            remove_field => [ "http_cookie"]
+        }
+        if [http_user_agent] {
+            grok {
+                match => {
+                "message" => " %{SYSLOGPROG:Mozilla_standard}/%{DATA} \(%{DATA:PC_device}; %{DATA:System_device}\) %{SYSLOGPROG} \(%{DATA:KHTML}\) %{SYSLOGPROG:Browser_device}/%{DATA} %{SYSLOGPROG} "
+                }
+            }
+          date {
+              match => [ "time_local", "dd/MM/yyyy:hh:mm:ss Z" ]
+          }    
+        }
+        if [http_x_forwarded_for] {
+            ruby {
+                init => "@kname = ['http_x_forwarded_for_external','http_x_forwarded_for_internal']"
+                code => "
+                    new_event = LogStash::Event.new(Hash[@kname.zip(event.get('request').split(', '))])
+                    new_event.remove('@timestamp')
+                    event.append(new_event)
+                "
+            }
+        }
+      }
+      output {
+          elasticsearch {
+              hosts => ["elasticsearch-logging:9200"]
+              index => "k8s-%{type}-%{+YYYY.MM.dd}"
+              document_type => "%{type}"
+              workers => 1
+              flush_size => 20000
+              idle_flush_time => 10
+              template_overwrite => true
+              codec => json
+          }
+      }
+
+

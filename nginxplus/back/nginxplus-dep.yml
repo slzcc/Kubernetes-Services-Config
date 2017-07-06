@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginxplus
+  labels:
+    app: cheese
+    cheese: nginxplus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: nginxplus
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: nginxplus
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: shileizcc.com
+      containers:
+      - name: nginxplus
+        image: registry.aliyuncs.com/slzcc/nginxplus
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        volumeMounts:
+          - mountPath: "/var/data"
+            name: data
+          - mountPath: "/mirror"
+            name: mirror
+          - mountPath: "/etc/nginx"
+            name: nginx
+      imagePullSecrets:
+        - name: myregistrykey
+      volumes:
+        - hostPath:
+            path: "/var/data"
+          name: data
+        - hostPath:
+            path: "/mirror"
+          name: mirror        
+        - hostPath:
+            path: "/opt/nginxplus"
+          name: nginx
