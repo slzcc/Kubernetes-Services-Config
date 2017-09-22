@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: default
+  namespace: default
+subjects:
+- kind: User
+  name: jane
+  apiGroups: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroups: rbac.authorization.k8s.io
