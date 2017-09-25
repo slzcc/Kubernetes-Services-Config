@@ -38,15 +38,15 @@ spec:
         - containerPort: 9300
           name: transport
           protocol: TCP
-        volumeMounts:
-        - name: es-persistent-storage
-          mountPath: "/usr/share/elasticsearch/data"
-        - name: es-plugins
-          mountPath: "/usr/share/elasticsearch/plugins"
-      volumes:
-      - name: es-persistent-storage
-        hostPath:
-          path: "/data/elasticsearch"
-      - name: es-plugins
-        hostPath:
-          path: "/data/elasticsearch-plugins"
+      #   volumeMounts:
+      #   - name: es-persistent-storage
+      #     mountPath: "/usr/share/elasticsearch/data"
+      #   - name: es-plugins
+      #     mountPath: "/usr/share/elasticsearch/plugins"
+      # volumes:
+      # - name: es-persistent-storage
+      #   hostPath:
+      #     path: "/data/elasticsearch"
+      # - name: es-plugins
+      #   hostPath:
+      #     path: "/data/elasticsearch-plugins"
