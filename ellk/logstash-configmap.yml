@@ -70,16 +70,15 @@ data:
                     remove_field => [ "url_args","uri","request" ,"request_body"]
                 }
             }
-
-            if [http_x_forwarded_for] {
+        }
+        if [http_x_forwarded_for] {
             ruby {
-                init => "@kname = ['http_x_forwarded_for_external','http_x_forwarded_for_internal']"
+                init => "@kname = ['external','internal']"
                 code => "
-                    new_event = LogStash::Event.new(Hash[@kname.zip(event.get('request').split(', '))])
+                    new_event = LogStash::Event.new(Hash[@kname.zip(event.get('request').split(','))])
                     new_event.remove('@timestamp')
                     event.append(new_event)
                 "
-                 }
             }
         }
         kv {
