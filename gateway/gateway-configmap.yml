@@ -87,5 +87,13 @@ data:
       location ^~ /.git {
         return 444;
       }
-
+    location ~* ^(/viewpage.action|pages/viewpage.action) {
+            return 403;
+    }
+    location ^~ /.git {
+            return 403;
+    }
+    location ~*.php {
+            return 403;
+    }
     }
