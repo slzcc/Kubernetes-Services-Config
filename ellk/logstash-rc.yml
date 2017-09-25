@@ -20,7 +20,7 @@ spec:
         kubernetes.io/cluster-service: "true"
     spec:
       nodeSelector:
-        role: elk
+        role: gcloud
       containers:
       - image: registry.aliyuncs.com/slzcc/logstash-build
         name: logstash

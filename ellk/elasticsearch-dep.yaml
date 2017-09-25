@@ -22,9 +22,9 @@ spec:
         kubernetes.io/cluster-service: "true"
     spec:
       nodeSelector:
-        role: elk
+        role: gcloud
       containers:
-      - image: registry.aliyuncs.com/slzcc/elasticsearch
+      - image: registry.aliyuncs.com/slzcc/elasticsearch:5.5
         name: elasticsearch
 #        resources:
 #          limits:

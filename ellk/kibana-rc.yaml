@@ -17,10 +17,10 @@ spec:
         k8s-app: kibana-logging
     spec:
       nodeSelector:
-        role: elk
+        role: gcloud
       containers:
       - name: kibana-logging
-        image: registry.aliyuncs.com/slzcc/kibana
+        image: registry.aliyuncs.com/slzcc/kibana:5.5
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
