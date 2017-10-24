@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: desktop
+  namespace: default
+  labels:
+    app: cheese
+    task: desktop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: desktop
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: desktop
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: shileizcc.com
+      containers:
+      - name: desktop
+        image: registry.aliyuncs.com/slzcc/ubuntu-desktop-lxde-vnc:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: vnc
+          containerPort: 5900
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+      imagePullSecrets:
+        - name: myregistrykey
