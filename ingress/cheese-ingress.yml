@@ -54,7 +54,21 @@ spec:
         backend:
           serviceName: nginxplus
           servicePort: http
-  - host: kibana.shileizcc.com
+  - host: data.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: slzcc.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
+  - host: test.shileizcc.com
     http:
       paths:
       - path: /
