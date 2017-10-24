@@ -22,7 +22,7 @@ spec:
         role: xsj
       containers:
       - name: jenkins
-        image: registry.aliyuncs.com/slzcc/jenkins:kubernetes-master-2.58
+        image: registry.aliyuncs.com/slzcc/jenkins:2.79
         ports:
         - name: http
           containerPort: 8080
