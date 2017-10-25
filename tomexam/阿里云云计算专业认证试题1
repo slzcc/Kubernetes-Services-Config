@@ -216,7 +216,7 @@
 
 [题干]同一个地域内，不同账号下，经典网络下可以通过安全组规则设置两台云服务器之间内网互通，那么有UserA 的用户在华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceA（内网 IP：A.A.A.A），InstanceA所属的安全组为 GroupA，另一个UserB 
 的用户多华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceB（内网 IP：B.B.B.B），InstanceB 所属的安全组为 GroupB，如何操作可以实现 InstanceA 和 InstanceB 在内网上互通？
-[类型]单选
+[类型]多选
 [选项]{A:UserA 为GroupA 添加一条这样的规则：在内网入方向 授权 B.B.B.B 的 IP 可以访问 GroupA 下的所有ECS 云服务器},{B:UserB 为GroupB 添加一条这样的规则：在内网入方向 授权 A.A.A.A 的 IP 可以访问 GroupB 下的所有ECS 云服务器},{C:UserA 为GroupA 添加一条这样的规则：在内网出方向 授权 B.B.B.B 的 IP 可以访问 GroupA 下的所有ECS 云服务器},{D:UserB 为GroupB 添加一条这样的规则：在内网出方向 授权 A.A.A.A 的 IP 可以访问 GroupB 下的所有ECS 云服务器}
 [答案]AB
 [解析]
