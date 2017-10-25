@@ -31,17 +31,5 @@ spec:
         env:
         - name: TZ
           value: "Asia/Shanghai"
-        volumeMounts:
-          - mountPath: "/usr/local/tomcat/webapps/ROOT"
-            name: data
-        env:
-        - name: TZ
-          value: "Asia/Shanghai"
-      imagePullSecrets:
-        - name: myregistrykey
-      volumes:
-        - hostPath:
-            path: "/data/tomexam/ROOT"
-          name: data
       imagePullSecrets:
         - name: myregistrykey
