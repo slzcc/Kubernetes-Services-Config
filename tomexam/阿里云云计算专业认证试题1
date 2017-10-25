@@ -214,8 +214,7 @@
 [答案]B
 [解析]OSS ACL 提供存储空间级别的权限访问控制，公共读写：任何人（包括匿名访问）都可以对该存储空间中的文件进行读写操作，所有这些操作产生的费用由该存储空间的创建者承担，请慎用该权限。公共读：只有该存储空间的创建者可以对该存储空间内的文件进行写操作，任何人（包括匿名访问）可以对该存储空间中的文件进行读操作。私有：只有该存储空间的创建者可以对该存储空间内的文件进行读写操作，其他人无法访问该存储空间内的文件。
 
-[题干]同一个地域内，不同账号下，经典网络下可以通过安全组规则设置两台云服务器之间内网互通，那么有UserA 的用户在华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceA（内网 IP：A.A.A.A），InstanceA所属的安全组为 GroupA，另一个UserB 
-的用户多华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceB（内网 IP：B.B.B.B），InstanceB 所属的安全组为 GroupB，如何操作可以实现 InstanceA 和 InstanceB 在内网上互通？
+[题干]同一个地域内，不同账号下，经典网络下可以通过安全组规则设置两台云服务器之间内网互通，那么有UserA 的用户在华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceA（内网 IP：A.A.A.A），InstanceA所属的安全组为 GroupA，另一个UserB 的用户多华东 1 (杭州)有一台经典网络的 ECS 云服务器 InstanceB（内网 IP：B.B.B.B），InstanceB 所属的安全组为 GroupB，如何操作可以实现 InstanceA 和 InstanceB 在内网上互通？
 [类型]多选
 [选项]{A:UserA 为GroupA 添加一条这样的规则：在内网入方向 授权 B.B.B.B 的 IP 可以访问 GroupA 下的所有ECS 云服务器},{B:UserB 为GroupB 添加一条这样的规则：在内网入方向 授权 A.A.A.A 的 IP 可以访问 GroupB 下的所有ECS 云服务器},{C:UserA 为GroupA 添加一条这样的规则：在内网出方向 授权 B.B.B.B 的 IP 可以访问 GroupA 下的所有ECS 云服务器},{D:UserB 为GroupB 添加一条这样的规则：在内网出方向 授权 A.A.A.A 的 IP 可以访问 GroupB 下的所有ECS 云服务器}
 [答案]AB
