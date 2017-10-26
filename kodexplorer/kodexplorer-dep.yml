@@ -31,6 +31,8 @@ spec:
         volumeMounts:
           - mountPath: "/var/www/html/data/User/admin/home/VOLUME"
             name: data
+          - mountPath: "/var/www/html/data/Group"
+            name: data2
           - mountPath: "/var/www/html"
             name: config
         env:
@@ -42,6 +44,9 @@ spec:
         - hostPath:
             path: "/data/yunpan/data"
           name: data
+        - hostPath:
+            path: "/data/yunpan/data/Group"
+          name: data2
         - hostPath:
             path: "/data/yunpan/config"
           name: config
