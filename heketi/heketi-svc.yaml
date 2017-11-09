@@ -1,0 +1,28 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "heketi",
+    "labels": {
+      "glusterfs": "heketi-service",
+      "deploy-heketi": "support"
+    },
+    "annotations": {
+      "description": "Exposes Heketi Service"
+    }
+  },
+  "spec": {
+    "selector": {
+      "name": "heketi"
+    },
+    "type": "NodePort",
+    "ports": [
+      {
+        "name": "heketi",
+        "targetPort": 8080,
+        "port": 8080,
+        "nodePort": 30800
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+    "clusters": [
+        {
+            "nodes": [
+                {
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "gke-cluster-2-default-pool-58c1ec80-0kn1"
+                            ],
+                            "storage": [
+                                "10.140.0.3"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/sdc"
+                    ]
+                },
+                {
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "gke-cluster-2-default-pool-58c1ec80-5m0r"
+                            ],
+                            "storage": [
+                                "10.140.0.2"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/sdc"
+                    ]
+                },
+                {
+                    "node": {
+                        "hostnames": {
+                            "manage": [
+                                "gke-cluster-2-default-pool-58c1ec80-smfz"
+                            ],
+                            "storage": [
+                                "10.140.0.4"
+                            ]
+                        },
+                        "zone": 1
+                    },
+                    "devices": [
+                        "/dev/sdc"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -33,6 +33,8 @@ spec:
             name: data
           - mountPath: "/var/www/html/data/Group"
             name: data2
+          - mountPath: "/var/www/html/data/Group/mirror"
+            name: mirror
           - mountPath: "/var/www/html"
             name: config
         env:
@@ -44,6 +46,9 @@ spec:
         - hostPath:
             path: "/data/yunpan/data"
           name: data
+        - hostPath:
+            path: "/var/data/work_dir/mirror"
+          name: mirror
         - hostPath:
             path: "/data/yunpan/data/Group"
           name: data2

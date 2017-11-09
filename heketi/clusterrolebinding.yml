@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+kind: ClusterRoleBinding
+metadata:
+  name: heketi-sa-view
+roleRef:
+  apiGroup: ""
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: heketi-service-account
+    namespace: default
