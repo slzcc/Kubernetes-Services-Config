@@ -6,7 +6,7 @@
                     "node": {
                         "hostnames": {
                             "manage": [
-                                "gke-cluster-2-default-pool-58c1ec80-0kn1"
+                                "gke-cluster-6-default-pool-c135a5b9-1d4p"
                             ],
                             "storage": [
                                 "10.140.0.3"
@@ -22,13 +22,13 @@
                     "node": {
                         "hostnames": {
                             "manage": [
-                                "gke-cluster-2-default-pool-58c1ec80-5m0r"
+                                "gke-cluster-6-default-pool-c135a5b9-pkvn"
                             ],
                             "storage": [
-                                "10.140.0.2"
+                                "10.140.0.4"
                             ]
                         },
-                        "zone": 1
+                        "zone": 2
                     },
                     "devices": [
                         "/dev/sdb"
@@ -38,13 +38,13 @@
                     "node": {
                         "hostnames": {
                             "manage": [
-                                "gke-cluster-2-default-pool-58c1ec80-smfz"
+                                "gke-cluster-6-default-pool-c135a5b9-wg7l"
                             ],
                             "storage": [
-                                "10.140.0.4"
+                                "10.140.0.2"
                             ]
                         },
-                        "zone": 1
+                        "zone": 3
                     },
                     "devices": [
                         "/dev/sdb"
