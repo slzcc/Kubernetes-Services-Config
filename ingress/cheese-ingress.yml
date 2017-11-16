@@ -54,27 +54,6 @@ spec:
         backend:
           serviceName: nginxplus
           servicePort: http
-  - host: data.shileizcc.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: kodexplorer
-          servicePort: http
-  - host: slzcc.shileizcc.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: tomexam
-          servicePort: http
-  - host: test.shileizcc.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: nginxplus
-          servicePort: http
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
