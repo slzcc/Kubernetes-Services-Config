@@ -54,6 +54,13 @@ spec:
         backend:
           serviceName: nginxplus
           servicePort: http
+  - host: 101.200.83.130
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
