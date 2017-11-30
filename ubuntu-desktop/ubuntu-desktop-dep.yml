@@ -20,7 +20,7 @@ spec:
         version: v0.0.1
     spec:
       nodeSelector:
-        role: xsj
+        role: shileizcc.com
       containers:
       - name: desktop
         image: registry.aliyuncs.com/slzcc/ubuntu-desktop-lxde-vnc:latest
