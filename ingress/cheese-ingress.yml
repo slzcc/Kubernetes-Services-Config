@@ -54,13 +54,6 @@ spec:
         backend:
           serviceName: nginxplus
           servicePort: http
-  - host: data.shileizcc.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: wiki-watermark
-          servicePort: http
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
