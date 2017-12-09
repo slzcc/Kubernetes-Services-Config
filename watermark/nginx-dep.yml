@@ -23,7 +23,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: nginx-mirror
-	imagePullPolicy: Always
+        imagePullPolicy: Always
         image: registry.aliyuncs.com/slzcc/nginx:watermark
         ports:
         - name: http
