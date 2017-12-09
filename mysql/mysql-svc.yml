@@ -11,7 +11,7 @@ spec:
 #  clusterIP: None
 #  selector:
 #    name: mysql
-#  type: NodePort
+  type: NodePort
   ports:
    - name: http
      port: 3306
