@@ -11,8 +11,8 @@ spec:
      protocol: TCP
      nodePort: 59000
    - name: http
-     port: 6080
-     targetPort: 80
+     port: 80
+     targetPort: 6080
      protocol: TCP
   type: NodePort
   selector:
