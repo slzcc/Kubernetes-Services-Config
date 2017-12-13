@@ -112,6 +112,8 @@ spec:
       labels:
         k8s-app: kubernetes-dashboard
     spec:
+      nodeSelector:
+        role: shileizcc.com
       containers:
       - name: kubernetes-dashboard
         image: gcr.io/google_containers/kubernetes-dashboard-amd64:v1.8.0
