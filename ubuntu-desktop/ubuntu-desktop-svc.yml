@@ -10,6 +10,10 @@ spec:
      targetPort: 5900
      protocol: TCP
      nodePort: 59000
+   - name: http
+     port: 6080
+     targetPort: 80
+     protocol: TCP
   type: NodePort
   selector:
     app: cheese

@@ -23,13 +23,18 @@ spec:
         role: shileizcc.com
       containers:
       - name: desktop
-        image: registry.aliyuncs.com/slzcc/ubuntu-desktop-lxde-vnc:latest
+#        image: registry.aliyuncs.com/slzcc/ubuntu-desktop-lxde-vnc:password
+        image: dorowu/ubuntu-desktop-lxde-vnc:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: vnc
           containerPort: 5900
+        - name: http
+          containerPort: 80
         env:
         - name: TZ
           value: "Asia/Shanghai"
+        - name: VNC_PASSWORD
+          value: "shileizcc.com"
       imagePullSecrets:
         - name: myregistrykey
