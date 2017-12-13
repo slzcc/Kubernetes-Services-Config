@@ -9,7 +9,7 @@ spec:
      port: 5900
      targetPort: 5900
      protocol: TCP
-     nodePort: 59000
+     nodePort: 31000
    - name: http
      port: 80
      targetPort: 6080
