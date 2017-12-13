@@ -78,22 +78,19 @@ data:
     #        }
             location /src {
                     root /registry;
-      }
+    	    }
             location ^~ /info.php {
                     auth_basic                  "Please Input username/password";
                     auth_basic_user_file        status-password;
             }
 
-      location ^~ /.git {
-        return 444;
-      }
-    location ~* ^(/viewpage.action|pages/viewpage.action) {
-            return 403;
-    }
-    location ^~ /.git {
-            return 403;
-    }
-    location ~*.php {
-            return 403;
-    }
+    	    location ~* ^(/viewpage.action|pages/viewpage.action) {
+            	    return 403;
+    	    }
+            location ^~ /.git {
+                    return 403;
+            }
+            location ~*.php {
+                    return 403;
+            }
     }
