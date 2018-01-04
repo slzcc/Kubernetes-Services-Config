@@ -14,10 +14,12 @@ spec:
             args:
             - /bin/sh
             - -c
-            - tar zcf confluence_`date +%F_%R`.tar.gz -C /mysqlBackup data
+            - tar zcf confluence_`date +%F_%R`.tar.gz -C /dataBackup data
             volumeMounts:
-              - mountPath: "/mysqlBackup"
+              - mountPath: "/data"
                 name: data
+              - mountPath: "/dataBackup"
+                name: backup
             env:
             - name: TZ
               value: "Asia/Shanghai"
@@ -25,4 +27,7 @@ spec:
             - hostPath:
                 path: "/var/data/opt/altassian/confluence"
               name: data
+            - hostPath:
+                path: "/var/data/confluenceBackup"
+              name: backup
           restartPolicy: OnFailure
