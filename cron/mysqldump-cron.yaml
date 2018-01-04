@@ -14,7 +14,7 @@ spec:
             args:
             - /bin/sh
             - -c
-            - mysqldump -uroot -pChengcheng_slzcc -h mysql.default.svc confluence > /mysqlBackup/confluence_`date +%F_%R`.sql
+            - mysqldump -uroot -pChengcheng_slzcc -h mysql confluence > /mysqlBackup/confluence_`date +%F_%R`.sql
             volumeMounts:
               - mountPath: "/mysqlBackup"
                 name: data
