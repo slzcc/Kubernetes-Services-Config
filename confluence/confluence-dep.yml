@@ -23,7 +23,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: confluence
-        image: registry.aliyuncs.com/slzcc/confluence:6.6.0
+        image: registry.aliyuncs.com/slzcc/confluence:6.0.4
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
