@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: hello
+  name: confluence-data-backup
 spec:
   schedule: "* */23 * * *"
   jobTemplate:
@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-          - name: hello
+          - name: confluence-data-backup
             image: busybox
             args:
             - /bin/sh
