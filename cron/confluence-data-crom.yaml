@@ -1,20 +1,20 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: mysqldump
+  name: hello
 spec:
-  schedule: "* */23 * * *"
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: mysqldump
-            image: registry.aliyuncs.com/slzcc/mysql:5.6
+          - name: hello
+            image: busybox
             args:
             - /bin/sh
             - -c
-            - mysqldump -uroot -pChengcheng_slzcc -h mysql.default.svc confluence > /mysqlBackup/confluence_`date +%F_%R`.sql
+            - tar zcf confluence_`data +%F_%R`.tar.gz -C /mysqlBackup data
             volumeMounts:
               - mountPath: "/mysqlBackup"
                 name: data
@@ -23,6 +23,6 @@ spec:
               value: "Asia/Shanghai"
           volumes:
             - hostPath:
-                path: "/var/data/mysqlBackup"
+                path: "/var/data/opt/altassian/confluence"
               name: data
           restartPolicy: OnFailure
