@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: confluence-data-backup
 spec:
-  schedule: "* */23 * * *"
+  schedule: "* 23 * * *"
   jobTemplate:
     spec:
       template:
