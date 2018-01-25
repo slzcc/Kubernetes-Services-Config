@@ -24,7 +24,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: nginxplus
+          serviceName: confluence
           servicePort: http
   - host: k8s.shileizcc.com
     http:
