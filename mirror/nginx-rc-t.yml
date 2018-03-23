@@ -23,7 +23,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: nginx-mirror
-        image: registry.aliyuncs.com/slzcc/nginx-1.11.5
+        image: registry.aliyuncs.com/slzcc/nginx::language-zh
         ports:
         - name: http
           containerPort: 80
