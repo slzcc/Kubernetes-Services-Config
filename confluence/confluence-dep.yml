@@ -31,7 +31,7 @@ spec:
         - name: out
           containerPort: 8000
         volumeMounts:
-          - mountPath: "/opt/atlassian/confluence/data"
+          - mountPath: "/opt/altassian/confluence/data"
             name: data
         env:
         - name: TZ
