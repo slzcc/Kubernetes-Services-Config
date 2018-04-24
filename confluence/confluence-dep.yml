@@ -23,17 +23,17 @@ spec:
         role: shileizcc.com
       containers:
       - name: confluence
-        image: registry.aliyuncs.com/slzcc/confluence:6.0.4.1
+        image: registry.aliyuncs.com/slzcc/confluence:6.0.4.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 8090
-        - name: out
+        - name: interaction
           containerPort: 8000
         - name: synchrony
           containerPort: 8091
         volumeMounts:
-          - mountPath: "/opt/atlassian/confluence/data"
+          - mountPath: "/var/atlassian/application-data"
             name: data
         env:
         - name: TZ
