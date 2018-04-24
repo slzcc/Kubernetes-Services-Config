@@ -1,7 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+#  namespace: kube-system
   name: nginxplus
+  namespace: default
   labels:
     app: cheese
     cheese: nginxplus
@@ -30,21 +32,29 @@ spec:
         - name: https
           containerPort: 443
         volumeMounts:
-          - mountPath: "/var/data"
-            name: data
-          - mountPath: "/mirror"
-            name: mirror
-          - mountPath: "/etc/nginx"
-            name: nginx
+          - mountPath: "/etc/nginx/"
+            name: nginx-config
+          - mountPath: "/etc/nginx/conf.d/"
+            name: nginx-index
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
       imagePullSecrets:
         - name: myregistrykey
       volumes:
-        - hostPath:
-            path: "/var/data"
-          name: data
-        - hostPath:
-            path: "/mirror"
-          name: mirror        
-        - hostPath:
-            path: "/opt/nginxplus"
-          name: nginx
+        - name: nginxplus-index
+          configMap:
+            name: 
+            items:
+              - key: index.conf
+                path: index.conf
+              - key: status_password
+                path: status_password
+              - key: secret_password
+                path: secret_password
+        - name: nginxplus-nginx
+          configMap:
+            name: 
+            items:
+              - key: nginx.conf
+                path: nginx.conf

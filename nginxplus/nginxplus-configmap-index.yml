@@ -1,0 +1,258 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginxplus-index
+  namespace: default
+data:
+  index.conf: |-
+        resolver 10.96.0.10 valid=1s;
+
+        server {
+                listen 80;
+                server_name shileizcc.com;
+
+        	rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+        }
+
+        server {
+                listen 80;
+                server_name hotstone.com.cn;
+
+                rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+        }
+
+        server {
+                listen 80;
+                server_name 101.200.83.130;
+         	rewrite ^(.*) http://wiki.shileizcc.com permanent;
+        }
+
+        upstream wiki {
+        zone upstrean-wiki 64k;
+        server  confluence.default.svc.cluster.local service=_http._tcp resolve;
+        #server  wiki-watermark.default.svc.cluster.local service=_http._tcp resolve;
+        }
+
+        #upstream k8s {
+        #zone upstrean-k8s 64k;
+        #server  kubernetes-dashboard.kube-system.svc.cluster.local service=_http._tcp resolve;
+        #}
+
+        upstream gateway {
+        zone upstrean-gateway 64k;
+        server  gateway.default.svc.cluster.local service=_http._tcp resolve;
+        }
+
+        #upstream jenkins {
+        #zone upstrean-data 64k;
+        #server  jenkins.default.svc.cluster.local service=_http._tcp resolve;
+        #}
+
+        upstream mirror {
+        zone upstrean-mirror 64k;
+        server  mirror.default.svc.cluster.local service=_http._tcp resolve;
+        }
+
+        ## jenkins
+        #server  {
+        #                listen 80;
+        #                status_zone jenkins;
+        #                server_name dev.shileizcc.com;
+        #                location  / {
+        #                proxy_pass  http://jenkins;
+        #                proxy_redirect off;
+        #                proxy_set_header Host $host;
+        #                proxy_set_header X-Real-IP $remote_addr;
+        #                proxy_set_header REMOTE-HOST $remote_addr;
+        #                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #                client_max_body_size 50m;
+        #                client_body_buffer_size 256k;
+        #                proxy_connect_timeout 30;
+        #                proxy_send_timeout 30;
+        #                proxy_read_timeout 60;
+        #                proxy_buffer_size 256k;
+        #                proxy_buffers 4 256k;
+        #                proxy_busy_buffers_size 256k;
+        #                proxy_temp_file_write_size 256k;
+        #                proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+        #                proxy_max_temp_file_size 128m;
+        #                error_page  404 /var/data/logo/T/404.jpg;
+        #                error_page  502 /var/data/logo/T/502.png;
+        #        }
+        #
+        #}
+
+        ## gateway
+        server  {
+                        listen 80;
+                        status_zone gateway;
+                        server_name www.shileizcc.com;
+                        location  / {
+                        proxy_pass  http://gateway;
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header REMOTE-HOST $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        client_max_body_size 50m;
+                        client_body_buffer_size 256k;
+                        proxy_connect_timeout 30;
+                        proxy_send_timeout 30;
+                        proxy_read_timeout 60;
+                        proxy_buffer_size 256k;
+                        proxy_buffers 4 256k;
+                        proxy_busy_buffers_size 256k;
+                        proxy_temp_file_write_size 256k;
+                        proxy_max_temp_file_size 128m;
+                        error_page  404 /var/data/logo/T/404.jpg;
+                        error_page  502 /var/data/logo/T/502.png;
+                }
+        }
+
+        ## wiki
+        server  {
+                        listen 80;
+                        status_zone wiki;
+                        server_name wiki.shileizcc.com;
+                        location  / {
+                        proxy_pass  http://wiki;
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header REMOTE-HOST $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        client_max_body_size 50m;
+                        client_body_buffer_size 256k;
+                        proxy_connect_timeout 30;
+                        proxy_send_timeout 30;
+                        proxy_read_timeout 60;
+                        proxy_buffer_size 256k;
+                        proxy_buffers 4 256k;
+                        proxy_busy_buffers_size 256k;
+                        proxy_temp_file_write_size 256k;
+                        proxy_max_temp_file_size 128m;
+                        error_page  404 /var/data/logo/T/404.jpg;
+                        error_page  502 /var/data/logo/T/502.png;
+        #		location /img/ {
+        #        		image_filter watermark;
+        #        		image_filter_watermark "/etc/nginx/conf.d/shileizcc.com.watermark.png";
+        #        		image_filter_watermark_position center-center;
+        #        		image_filter_jpeg_quality   95;
+        #        		image_filter_buffer         20M;
+        #        		image_filter_watermark_width_from 400;
+        #      			image_filter_watermark_height_from 400;
+        #		}
+
+        #	        location ~* ^.+\.(gif|jpg|png|swf|flv|rar|zip|git)$ {
+        #        		valid_referers none blocked server_names *.shileizcc.com;
+        #        		if ($invalid_referer) {
+        #            			rewrite ^/ https://www.shileizcc.com/T/403.png;
+        #        		}
+        #    		}
+        #		limit_req zone=shileizcc_com burst=12 nodelay;
+
+        		# 禁止非GET|HEAD|POST方式的抓取
+        		if ($request_method !~ ^(GET|HEAD|POST)$) {
+            			return 403;
+        		}
+
+        		if ($http_user_agent ~* (Scrapy|HttpClient)) {
+             			return 403;
+        		}
+                }
+        }
+
+
+        ## k8s
+        #server  {
+        #                listen 80;
+        #   		     status_zone k8s;
+        #                server_name k8s.shileizcc.com;
+        #                location  / {
+        #                proxy_pass  http://k8s;
+        #                proxy_redirect off;
+        #                proxy_set_header Host $host;
+        #                proxy_set_header X-Real-IP $remote_addr;
+        #                proxy_set_header REMOTE-HOST $remote_addr;
+        #                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #                client_max_body_size 50m;
+        #                client_body_buffer_size 256k;
+        #                proxy_connect_timeout 30;
+        #                proxy_send_timeout 30;
+        #                proxy_read_timeout 60;
+        #                proxy_buffer_size 256k;
+        #                proxy_buffers 4 256k;
+        #                proxy_busy_buffers_size 256k;
+        #                proxy_temp_file_write_size 256k;
+        #                proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+        #                proxy_max_temp_file_size 128m;
+        #                error_page  404 /var/data/logo/T/404.jpg;
+        #                error_page  502 /var/data/logo/T/502.png;
+        #                auth_basic                  "Please Input username/password";
+        #                auth_basic_user_file        secret_password;
+        #                valid_referers none blocked  server_names *.shileizcc.com  www.shileizcc.com;
+        #        }
+        #}
+
+        ## mirror
+        server  {
+                        listen 80;
+                        status_zone mirror;
+                        server_name mirror.shileizcc.com;
+                        location  / {
+                        proxy_pass  http://mirror;
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header REMOTE-HOST $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        client_max_body_size 50m;
+                        client_body_buffer_size 256k;
+                        proxy_connect_timeout 30;
+                        proxy_send_timeout 30;
+                        proxy_read_timeout 60;
+                        proxy_buffer_size 256k;
+                        proxy_buffers 4 256k;
+                        proxy_busy_buffers_size 256k;
+                        proxy_temp_file_write_size 256k;
+                        proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+                        proxy_max_temp_file_size 128m;
+                        error_page  404 /var/data/logo/T/404.jpg;
+                        error_page  502 /var/data/logo/T/502.png;
+                }
+        }
+
+        server {
+                listen 80;
+                server_name status.shileizcc.com;
+                root /usr/share/nginx/html;
+                # Redirect requests for / to /status.html
+                location = / {
+                    return 301 /status.html;
+                }
+                location = /status.html { }
+                # Everything beginning with /status (except for /status.html) is
+                # processed by the status handler
+                location /status {
+                    status;
+        #            auth_basic                  "Please Input username/password";
+        #            auth_basic_user_file        status_password;
+                }
+        }
+
+        #server {
+        #       listen 80;
+        #       location ^~ /.well-known/acme-challenge/ {
+        #           alias /var/data/challenges/;
+        #           try_files $uri =404;
+        #       }
+        #       location / {
+        #           rewrite ^/(.*)$ https://shileizcc.com/$1 permanent;
+        #       }
+        #}
+
+  status_password:
+        Slzcc:$apr1$C27cZQg7$kWhCHXSG.MbyvyW/Q7vUV0
+
+  secret_password:
+        Slzcc:$apr1$ZldTwd1G$WBUmBMoFiOYCjGdZmdg.q.

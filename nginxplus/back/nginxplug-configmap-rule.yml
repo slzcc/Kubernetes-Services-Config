@@ -1,0 +1,19 @@
+server {
+        listen 80;
+        server_name shileizcc.com;
+
+	rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+}
+
+server {
+        listen 80;
+        server_name hotstone.com.cn;
+
+        rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+}
+
+server {
+        listen 80;
+        server_name 101.200.83.130;
+ 	rewrite ^(.*) http://wiki.shileizcc.com permanent;
+}
