@@ -30,8 +30,10 @@ spec:
           containerPort: 8090
         - name: out
           containerPort: 8000
+        - name: synchrony
+          containerPort: 8091
         volumeMounts:
-          - mountPath: "/opt/altassian/confluence/data"
+          - mountPath: "/opt/atlassian/confluence/data"
             name: data
         env:
         - name: TZ
@@ -40,5 +42,5 @@ spec:
         - name: myregistrykey
       volumes:
         - hostPath:
-            path: "/var/data/opt/altassian/confluence/data"
+            path: "/var/data/opt/atlassian/confluence/data"
           name: data
