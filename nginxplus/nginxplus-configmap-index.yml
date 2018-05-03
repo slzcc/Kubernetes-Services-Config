@@ -33,6 +33,11 @@ data:
         #server  wiki-watermark.default.svc.cluster.local service=_http._tcp resolve;
         }
 
+        upstream wiki_synchrony {
+        zone upstrean-wiki-synchrony 64k;
+        server  confluence.default.svc.cluster.local service=_synchrony._tcp resolve;
+        }
+
         #upstream k8s {
         #zone upstrean-k8s 64k;
         #server  kubernetes-dashboard.kube-system.svc.cluster.local service=_http._tcp resolve;
@@ -155,7 +160,7 @@ data:
                             proxy_set_header X-Forwarded-Host $host;
                             proxy_set_header X-Forwarded-Server $host;
                             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                            proxy_pass http://wiki/synchrony;
+                            proxy_pass http://wiki_synchrony/synchrony;
                             proxy_http_version 1.1;
                             proxy_set_header Upgrade $http_upgrade;
                             proxy_set_header Connection "Upgrade";
