@@ -35,6 +35,8 @@ spec:
         volumeMounts:
           - mountPath: "/var/atlassian/application-data"
             name: data
+          - mountPath: "/opt/atlassian/confluence/conf/server.xml"
+            name: server
         env:
         - name: TZ
           value: "Asia/Shanghai"
@@ -44,3 +46,6 @@ spec:
         - hostPath:
             path: "/var/data/opt/atlassian/confluence/data"
           name: data
+        - hostPath:
+            path: "/root/server.xml"
+          name: server
