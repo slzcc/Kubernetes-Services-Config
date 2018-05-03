@@ -24,7 +24,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: nginxplus
-        image: registry.aliyuncs.com/slzcc/nginxplus
+        image: registry.aliyuncs.com/slzcc/nginxplus:nginxconf
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -32,10 +32,8 @@ spec:
         - name: https
           containerPort: 443
         volumeMounts:
-          - mountPath: "/etc/nginx/"
-            name: nginx-config
           - mountPath: "/etc/nginx/conf.d/"
-            name: nginx-index
+            name: nginxplus-index
         env:
         - name: TZ
           value: "Asia/Shanghai"
@@ -52,9 +50,3 @@ spec:
                 path: status_password
               - key: secret_password
                 path: secret_password
-        - name: nginxplus-nginx
-          configMap:
-            name: 
-            items:
-              - key: nginx.conf
-                path: nginx.conf
