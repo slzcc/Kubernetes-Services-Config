@@ -33,16 +33,16 @@ spec:
           containerPort: 443
         volumeMounts:
           - mountPath: "/etc/nginx/conf.d/"
-            name: nginxplus-index
+            name: index
         env:
         - name: TZ
           value: "Asia/Shanghai"
       imagePullSecrets:
         - name: myregistrykey
       volumes:
-        - name: nginxplus-index
+        - name: index
           configMap:
-            name: 
+            name: nginxplus-index
             items:
               - key: index.conf
                 path: index.conf
