@@ -23,7 +23,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: confluence
-        image: registry.aliyuncs.com/slzcc/confluence:6.0.4.2
+        image: registry.aliyuncs.com/slzcc/confluence:6.0.4.5
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -35,8 +35,6 @@ spec:
         volumeMounts:
           - mountPath: "/var/atlassian/application-data"
             name: data
-          - mountPath: "/opt/atlassian/confluence/conf/server.xml"
-            name: server
         env:
         - name: TZ
           value: "Asia/Shanghai"
@@ -46,6 +44,3 @@ spec:
         - hostPath:
             path: "/var/data/opt/atlassian/confluence/data"
           name: data
-        - hostPath:
-            path: "/root/server.xml"
-          name: server
