@@ -25,7 +25,7 @@ spec:
               value: "Asia/Shanghai"
           volumes:
             - hostPath:
-                path: "/var/data/opt/altassian/confluence"
+                path: "/var/data/opt/atlassian/confluence"
               name: data
             - hostPath:
                 path: "/var/data/confluenceBackup"
