@@ -120,7 +120,7 @@ data:
                         status_zone wiki;
                         server_name wiki.shileizcc.com;
                         location  / {
-                            rewrite ^(.*) http://wiki.shileizcc.com/confluence$1 last;
+                            rewrite ^(.*) https://wiki.shileizcc.com/confluence$1 last;
 
                             # proxy_pass  http://wiki;
                             # proxy_redirect off;
