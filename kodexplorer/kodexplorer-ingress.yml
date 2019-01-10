@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kodexplorer
+  namespace: default
+spec:
+  rules:
+  - host: data.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kodexplorer
+          servicePort: http

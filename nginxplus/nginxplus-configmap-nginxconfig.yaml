@@ -21,6 +21,10 @@ data:
             include       /etc/nginx/mime.types;
             default_type  application/octet-stream;
             limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Credentials true;
+            add_header Access-Control-Allow-Headers *;
+            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
 
         #    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
         #                      '$status $body_bytes_sent "$http_referer" '
@@ -44,7 +48,9 @@ data:
             sendfile        on;
             #tcp_nopush     on;
             client_body_buffer_size 102400;
-            keepalive_timeout  65;
+            keepalive_timeout  600;
+            ignore_invalid_headers off;
+            underscores_in_headers on;
 
             #gzip  on;
 

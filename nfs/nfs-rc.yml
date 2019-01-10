@@ -35,7 +35,7 @@ spec:
       volumes:
       - name: mypvc
         hostPath:
-          path: /var/data/nfs
+          path: /var/data/work_dir/nfs
 ---
 kind: Service
 apiVersion: v1

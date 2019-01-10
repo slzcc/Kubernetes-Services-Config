@@ -52,6 +52,18 @@ data:
     character_set_server=utf8
     skip-character-set-client-handshake
     transaction-isolation=READ-COMMITTED
+    innodb_log_file_size=4GB
+    innodb_large_prefix=1
+    innodb_file_format=Barracuda
+    binlog_format = MIXED
+    log_bin = mysql-bin
+    expire_logs_days = 7
+    max_binlog_size = 5G
+    server-id=26
+    slow_query_log = ON
+    long_query_time = 2
+    slow_query_log_file = /var/lib/mysql/shileizcc-slow.log
+
     #
     # Instead of skip-networking the default is now to listen only on
     # localhost which is more compatible and is not less secure.
@@ -61,7 +73,7 @@ data:
     # * Fine Tuning
     #
     key_buffer_size         = 16M
-    max_allowed_packet  = 160M
+    max_allowed_packet  = 512M
     thread_stack    = 192K
     thread_cache_size       = 8
     # This replaces the startup script and checks MyISAM tables if needed
@@ -130,7 +142,7 @@ data:
     [mysqldump]
     quick
     quote-names
-    max_allowed_packet  = 16M
+    max_allowed_packet  = 160M
     #log-slow-queries="/var/log/mysql/mysql-slow.log"
     #long_query_time = 4
     #log-queries-not-using-indexes

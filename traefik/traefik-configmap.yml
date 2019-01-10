@@ -218,123 +218,14 @@ data:
       address = ":443"
         [entryPoints.https.tls]
           # certs used as default certs
-    #      [[entryPoints.https.tls.certificates]]
-    #      certFile = "/root/chained.pem"
-    #      keyFile = "/root/domain.key"
           [[entryPoints.https.tls.certificates]]
-          certFile = """-----BEGIN CERTIFICATE-----
-    MIIGETCCBPmgAwIBAgISAylM5IVrwIX4gygWGLsZ+R/7MA0GCSqGSIb3DQEBCwUA
-    MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD
-    ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0xNzAxMDQwNDI5MDBaFw0x
-    NzA0MDQwNDI5MDBaMBgxFjAUBgNVBAMTDXNoaWxlaXpjYy5jb20wggIiMA0GCSqG
-    SIb3DQEBAQUAA4ICDwAwggIKAoICAQD5wuckyA1riZ5RXTjAqedTqKoYUlBMH8e6
-    eTS+OuTHfB5p4AgFP7c1uYGcfgjev06l3tvX8KO366pXYLAOrkOQxxEB3aMk02kT
-    0xl6TVM61Eawc0q6cec2wil/cYoyK/EzhxiYd0GSO71qwY4YmBEVpgeg2EZ6m/Ds
-    8aoGBMMn97g1SHy5B9qpwgHq/1aGOtAKh8JpFOAtavYXXkrZFJuTsYC00YX/Oora
-    RnKmoL2HmgTkZGFqv0aBTBXGPJFi/eJVBOVgHVZEYBJHgY7oR9czwq7+tbbMMyGw
-    3nE5RYRkC2Ox51B34ccyYLjomlrW+YnBvpMAsao8YnN3heloDiX7H4LAJsXsPmOd
-    0Ge6BWkCOvh3GdtNZ3HQZT4OaM/mk85JdMdy1t340Wxqn4/Dj4IFlliHMZiT2sXJ
-    +S76qmZor6w4EPxZM8f1A5DEn5YSubt0bDRaMiotfGzcfNApg1N5VO+0e8MpADPu
-    j1a3r29tJ3lppYGbPSFDTN5619SoUPguaKpYbOUNB6DtH0/yg3dAtedAjwZtKxnf
-    A6Dvpb711orHINV7z+7iNCBTc3PvgGj4KuGb09Z0Srzm6ehH1BhACyykFKFrxvG0
-    ureQmJcrdfQdfr6Sx3L6jF9GB+x0To4A+OOeni0XZ+rf4kzcM9cJOoTGST6/3nRA
-    uUYVNCCjrwIDAQABo4ICITCCAh0wDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQG
-    CCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBTiiJKL
-    B9bFei/QvmmIBjb8SRLdvTAfBgNVHSMEGDAWgBSoSmpjBH3duubRObemRWXv86js
-    oTBwBggrBgEFBQcBAQRkMGIwLwYIKwYBBQUHMAGGI2h0dHA6Ly9vY3NwLmludC14
-    My5sZXRzZW5jcnlwdC5vcmcvMC8GCCsGAQUFBzAChiNodHRwOi8vY2VydC5pbnQt
-    eDMubGV0c2VuY3J5cHQub3JnLzArBgNVHREEJDAigg1zaGlsZWl6Y2MuY29tghF3
-    d3cuc2hpbGVpemNjLmNvbTCB/gYDVR0gBIH2MIHzMAgGBmeBDAECATCB5gYLKwYB
-    BAGC3xMBAQEwgdYwJgYIKwYBBQUHAgEWGmh0dHA6Ly9jcHMubGV0c2VuY3J5cHQu
-    b3JnMIGrBggrBgEFBQcCAjCBngyBm1RoaXMgQ2VydGlmaWNhdGUgbWF5IG9ubHkg
-    YmUgcmVsaWVkIHVwb24gYnkgUmVseWluZyBQYXJ0aWVzIGFuZCBvbmx5IGluIGFj
-    Y29yZGFuY2Ugd2l0aCB0aGUgQ2VydGlmaWNhdGUgUG9saWN5IGZvdW5kIGF0IGh0
-    dHBzOi8vbGV0c2VuY3J5cHQub3JnL3JlcG9zaXRvcnkvMA0GCSqGSIb3DQEBCwUA
-    A4IBAQALeoOuFR/W+F4MUmrXPlwOwj5soU7w8NEkNuVjlmpRIfwVxzPxU+NOjkRX
-    OFOdZAI5wo1/rWvwtdfyc7yNz99WzZFjZS1Xjaa4rzetVN+wHvk+YTCFJybCliNQ
-    ctTzgeykmwwlQEIhJ7Fziz8TdnDI2SY180Ag0nj89ZUVEUTViHfTDS1HH2CtrJ+e
-    IKWh745A2Q8nQTrikbRm97bvD6fkVzFsGU7ad9YOQ0M/JmUm+BLMwom9hB2GBsHw
-    sfThySEgFOkXlw+lcjEvbLQ6998KOD/OSZA8pHuvZYEKQL/LilM2+zMfYii78itY
-    LaUQeAvUwlANdvHi3NAikJC0HwOG
-    -----END CERTIFICATE-----
-    -----BEGIN CERTIFICATE-----
-    MIIEkjCCA3qgAwIBAgIQCgFBQgAAAVOFc2oLheynCDANBgkqhkiG9w0BAQsFADA/
-    MSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT
-    DkRTVCBSb290IENBIFgzMB4XDTE2MDMxNzE2NDA0NloXDTIxMDMxNzE2NDA0Nlow
-    SjELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUxldCdzIEVuY3J5cHQxIzAhBgNVBAMT
-    GkxldCdzIEVuY3J5cHQgQXV0aG9yaXR5IFgzMIIBIjANBgkqhkiG9w0BAQEFAAOC
-    AQ8AMIIBCgKCAQEAnNMM8FrlLke3cl03g7NoYzDq1zUmGSXhvb418XCSL7e4S0EF
-    q6meNQhY7LEqxGiHC6PjdeTm86dicbp5gWAf15Gan/PQeGdxyGkOlZHP/uaZ6WA8
-    SMx+yk13EiSdRxta67nsHjcAHJyse6cF6s5K671B5TaYucv9bTyWaN8jKkKQDIZ0
-    Z8h/pZq4UmEUEz9l6YKHy9v6Dlb2honzhT+Xhq+w3Brvaw2VFn3EK6BlspkENnWA
-    a6xK8xuQSXgvopZPKiAlKQTGdMDQMc2PMTiVFrqoM7hD8bEfwzB/onkxEz0tNvjj
-    /PIzark5McWvxI0NHWQWM6r6hCm21AvA2H3DkwIDAQABo4IBfTCCAXkwEgYDVR0T
-    AQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAYYwfwYIKwYBBQUHAQEEczBxMDIG
-    CCsGAQUFBzABhiZodHRwOi8vaXNyZy50cnVzdGlkLm9jc3AuaWRlbnRydXN0LmNv
-    bTA7BggrBgEFBQcwAoYvaHR0cDovL2FwcHMuaWRlbnRydXN0LmNvbS9yb290cy9k
-    c3Ryb290Y2F4My5wN2MwHwYDVR0jBBgwFoAUxKexpHsscfrb4UuQdf/EFWCFiRAw
-    VAYDVR0gBE0wSzAIBgZngQwBAgEwPwYLKwYBBAGC3xMBAQEwMDAuBggrBgEFBQcC
-    ARYiaHR0cDovL2Nwcy5yb290LXgxLmxldHNlbmNyeXB0Lm9yZzA8BgNVHR8ENTAz
-    MDGgL6AthitodHRwOi8vY3JsLmlkZW50cnVzdC5jb20vRFNUUk9PVENBWDNDUkwu
-    Y3JsMB0GA1UdDgQWBBSoSmpjBH3duubRObemRWXv86jsoTANBgkqhkiG9w0BAQsF
-    AAOCAQEA3TPXEfNjWDjdGBX7CVW+dla5cEilaUcne8IkCJLxWh9KEik3JHRRHGJo
-    uM2VcGfl96S8TihRzZvoroed6ti6WqEBmtzw3Wodatg+VyOeph4EYpr/1wXKtx8/
-    wApIvJSwtmVi4MFU5aMqrSDE6ea73Mj2tcMyo5jMd6jmeWUHK8so/joWUoHOUgwu
-    X4Po1QYz+3dszkDqMp4fklxBwXRsW10KXzPMTZ+sOPAveyxindmjkW8lGy+QsRlG
-    PfZ+G6Z6h7mjem0Y+iWlkYcV4PIWL1iwBi8saCbGS5jN2p8M+X+Q7UNKEkROb3N6
-    KOqkqm57TH2H3eDJAkSnh6/DNFu0Qg==
-    -----END CERTIFICATE-----"""
-          keyFile = """-----BEGIN RSA PRIVATE KEY-----
-    MIIJKgIBAAKCAgEA+cLnJMgNa4meUV04wKnnU6iqGFJQTB/Hunk0vjrkx3weaeAI
-    BT+3NbmBnH4I3r9Opd7b1/Cjt+uqV2CwDq5DkMcRAd2jJNNpE9MZek1TOtRGsHNK
-    unHnNsIpf3GKMivxM4cYmHdBkju9asGOGJgRFaYHoNhGepvw7PGqBgTDJ/e4NUh8
-    uQfaqcIB6v9WhjrQCofCaRTgLWr2F15K2RSbk7GAtNGF/zqK2kZypqC9h5oE5GRh
-    ar9GgUwVxjyRYv3iVQTlYB1WRGASR4GO6EfXM8Ku/rW2zDMhsN5xOUWEZAtjsedQ
-    d+HHMmC46Jpa1vmJwb6TALGqPGJzd4XpaA4l+x+CwCbF7D5jndBnugVpAjr4dxnb
-    TWdx0GU+DmjP5pPOSXTHctbd+NFsap+Pw4+CBZZYhzGYk9rFyfku+qpmaK+sOBD8
-    WTPH9QOQxJ+WErm7dGw0WjIqLXxs3HzQKYNTeVTvtHvDKQAz7o9Wt69vbSd5aaWB
-    mz0hQ0zeetfUqFD4LmiqWGzlDQeg7R9P8oN3QLXnQI8GbSsZ3wOg76W+9daKxyDV
-    e8/u4jQgU3Nz74Bo+Crhm9PWdEq85unoR9QYQAsspBSha8bxtLq3kJiXK3X0HX6+
-    ksdy+oxfRgfsdE6OAPjjnp4tF2fq3+JM3DPXCTqExkk+v950QLlGFTQgo68CAwEA
-    AQKCAgBA8m/M3sCuoCCtI8KoRwZCeO+SV4VN5k23reELPqFTRnFaMsmjI8hujgio
-    OxXvZmv7MhKU+px4LS4kfp4Jk0M6mKlRhOLxppACebh8VzM3bw/avoBGL2xijubf
-    nxTCqy6TqaO5sfk5H5PH+QEMYC7BJGWDa/oX1Ak4dDc0TXS6Je6e3HSiYOp5jluV
-    UkSbrxt+QYNKdAU/ijroJLrt7C/wng3L91gS4JRO4lbaAZ6HboOrKHc0nPymjrRy
-    0jk0NrTuStGixr4yFZFrSsNwn43UheGfln0saHdwWMe0juE4asXH81C3e9yiuwga
-    ZFkO4eDyoq3zVj/gZ/GCuS3SwysYuLplo7v+I4gJ3AuwZaXJja2uRo7JDJ5M4Qwy
-    wjg3wu/NIku7JTbe5mmycCN0PYgjFTX0QqndlXbQ4XPLdIyM9WJIgEnNJ5DjbxEC
-    BzMU8Dgctxjuae/GG2uNlyMM2FKFsZ3CZtq1lycXD/9uHOu7QwgM8wQcGo8m2kCW
-    UcLE543UgztcRXPvExvCvB2DMFvHjNpwttEItFcqubeiNzjJj+xOGuaBjne6suXH
-    mumaEGDixzstOkEqwFqUAXC2srOPdz/S870fiMQHYcRw8C5YH0pOpiZ+ZNH8Dk7E
-    W/KiXX63okhHqypxQZz6XZzkFn3QeCOXMkkw/8Yb0YZEJgAasQKCAQEA/+tlBosW
-    jjILNGTbzuxZkLO/DAJePVDBLtSa6NytAuk8uNZWpjyTc+FsLPZ11GFAK6U9dzar
-    iF/oA60DIYQsB7soBfBHS+5zUA0IbWMFNkh3ysB3ZxNr6WBhYRWLuelodg/llwxr
-    r1Sky2bWHl9NvQRf2UsfzJ/C5hpx3pOkJLP2GSfwgwfC/hI3mnSz6wYKfBxECc/f
-    7kqcQYexyslChrDkAiQn+4odHVVz9GOw0Et8LuuPX1z6myXHGpq72n0FbMdDm4TY
-    VhHnhq0zEXGQm1rQ/pe+S1JM3yu5LeazGtNqwscriyqy/1YYZOhFOJcgOGGRv2ez
-    eKQ6jd1QZbcYfQKCAQEA+dcDL9PwGoPAJ2th5zMYMb7n//OPASjg1dYPoRLFT4bc
-    0Dz6aC41L79v3THMYRULhJUKzs9hzChwTPvmSNxyKhIzyUcNtYa41OLdwGDWPnvV
-    6qTNz1osRU0t4uhAqV4UDZmYr5SSznk6N3JT93u8SogGqDwkwRA/J/QQ3q3iOBAA
-    5QHjOsSs/BXgc/Ax+qtv9a9DSKY69T+EXBiFhqxDNZCrwwVh0LWCUrjPM9EMhAb2
-    493yanbQ/9D7hF0jIdxUn8nmLEJpWgw7y9KQaYE7l3mxrhIm539Fob4SBf26eGwB
-    mgG93FQiT+l408doNo6Mp9N63ze1d7OrUuKR2UEQmwKCAQEAwcWkKr4ph+UQYs1z
-    OUvvzQasQxWP8XExtJm56VMdlLSxC2sPFLONGhK265x5PyObiPCGh7tXSd0EObRI
-    SJphFEF7XnO+KBoWKaiUlu6Axcc9HMF6Jwuni380fGPp9gxq0enbdvEqoAjA9lmZ
-    Ckoy/ElRoZ+mJjNZSQ0A5vx3LmssjYOWMkAwPlvgygxPJkberXZhdeR1s2G+ykdK
-    MTcOLhnFqnFh7K14ufs33vWUrUJadtRZLGWkQtDp3pUGY7qB3wlJgXmmrBTGb0y4
-    /B421cp/sCWJKlLYbaoXfk/NkSQ/E9fmemsMORUhR1YvA1g6RzZpOrn0RAZlZ4EJ
-    HNrzqQKCAQEArUxyXnOhQZMP74fx0iBD8QWeAZFdKY3EXy9rievuR1qhwiP6AdfD
-    dspQetr3DIQ/iAimBYweJzIJq6yzMOkQm5QircQGg1rezHRNIwtIsPDPEkKcq+69
-    dJizcohtic3DFSfsnCXvqx61vg4kpi8DDaPLElkdmXl+hWUranqsxvx60l770iDo
-    aLd4CJOc52aRc5bNkhAUJ1eWpRcxT5gfyoD+U3lhPxcYPe8JcsTX7KC0Ep06cJTY
-    Jgo83LSKEQu2+1tduGeckiSYOapmF3jX8BsunzLiH4PNtgKUl+lGtg8dEUmR+8m0
-    P0AQWr4f0HASqrrrqPgIfO54sTaNumgCbwKCAQEA14ijEjuRv+h0MUgVLw2omTHC
-    1VlGYEUZg6aWqf8ZAkBtLBuTJezgv8Bn4ixnc6PcncyRUunI/3xhBmyFxxljSNhS
-    9o6WeIwweVXK2M/Z5OZMeafG7cnxEnnku0S479xYFnqkiwmTfR4boMJ67ft9jFNx
-    FpS144ngRVUU7KBrBIJ6kf1WO2TaScqzV0wgyzlMxQhVpzU5llmbvptbSRjvQQ3+
-    p/PyQm1TIaIhfgZGqovbkSB0P+uxk4MkARwlGP8j/TRMWGL55VJrLijpuflpYRj1
-    Cu1TMDXY8qIiETkssc0417qgQJQjBHrX6cPAOcLu4irFO5la2X6WqxgNsJd9fQ==
-    -----END RSA PRIVATE KEY-----"""
+          certFile = "/cert/chained.pem"
+          keyFile = "/cert/domain.key"
+    #      [[entryPoints.https.tls.certificates]]
+    #      certFile = """-----BEGIN CERTIFICATE-----
+    #-----END CERTIFICATE-----"""
+    #      keyFile = """-----BEGIN RSA PRIVATE KEY-----
+    #-----END RSA PRIVATE KEY-----"""
 
     [acme]
     email = "383821949@qq.com"
@@ -343,7 +234,29 @@ data:
     onDemand = true
     ##caServer = "http://172.18.0.1:4000/directory"
     entryPoint = "https"
-
+    OnHostRule = true
+    
+    [[acme.domains]]
+      main = "shileizcc.com"
+      sans = ["dev.shileizcc.com", "test.shileizcc.com", "www.shileizcc.com", "wiki.shileizcc.com", "k8s.shileizcc.com", "traefig.shileizcc.com", "mirror.shileizcc.com", "slzcc.shileizcc.com", "data.shileizcc.com"]
+    
+    [web]
+    address = ":8088"
+    watch = true
+    
+    [kubernetes]
+    #endpoint = "http://10.173.32.67:8080"
+    #endpoint = "http://127.0.0.1:8080"
+    
+    # [etcd]
+    # endpoint = "127.0.0.1:2379"
+    # prefix = "traefik"
+    # watch = true
+    
+    # [etcd.tls]
+    # ca = "/etc/kubernetes/pki/etcd/ca.crt"
+    # cert = "/etc/kubernetes/pki/etcd/peer.crt"
+    # key = "/etc/kubernetes/pki/etcd/peer.key"
     #[[acme.domains]]
     #  main = "shileizcc.com"
     #  sans = ["dev.shileizcc.com","test.shileizcc.com", "www.shileizcc.com"]
@@ -427,9 +340,9 @@ data:
     # Optional
     #
     # [web]
-    [web]
-    address = ":8081"
-    watch = true
+    # [web]
+    # address = ":8081"
+    # watch = true
     # Web administration port
     #
     # Required
@@ -585,18 +498,18 @@ data:
 
 
 
-    [docker]
-    endpoint = "unix:///var/run/docker.sock"
-    domain = "shileizcc.com"
-    watch = true
+    # [docker]
+    # endpoint = "unix:///var/run/docker.sock"
+    # domain = "shileizcc.com"
+    # watch = true
 
 
     # filename = "docker.tmpl"
      
-    [consul]
-      endpoint = "101.200.39.80:8500"
-      watch = true
-      prefix = "traefik"
+    # [consul]
+    #   endpoint = "101.200.39.80:8500"
+    #   watch = true
+    #   prefix = "traefik"
 
     ################################################################
     # Mesos/Marathon configuration backend

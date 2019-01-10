@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nextcloud
+  namespace: default
+  labels:
+    app: cheese
+    task: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cheese
+      task: nextcloud
+  template:
+    metadata:
+      labels:
+        app: cheese
+        task: nextcloud
+        version: v0.0.1
+    spec:
+      nodeSelector:
+        role: shileizcc.com
+      containers:
+      - name: nextcloud
+        image: nextcloud
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+          - mountPath: "/var/www/html"
+            name: data
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+      volumes:
+        - hostPath:
+            path: "/var/data/nfs/nextcloud/data"
+          name: data
+#      - name: data
+#        persistentVolumeClaim:
+#          claimName: nextcloud-data

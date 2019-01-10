@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: owncloud
+  namespace: default
+spec:
+  rules:
+  - host: web.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: owncloud
+          servicePort: http

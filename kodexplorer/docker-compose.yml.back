@@ -1,0 +1,9 @@
+version: '2'
+services:
+  KODExplorer:
+    image: daocloud.io/daocloud/kodexplorer
+    restart: unless-stopped
+    ports:
+      - "87:80"
+    volumes:
+      - /var/data/work_dir/mirror/:/var/www/html/data/User/admin/home/VOLUME

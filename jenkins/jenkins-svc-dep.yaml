@@ -19,7 +19,7 @@ spec:
         version: v0.0.1
     spec:
       nodeSelector:
-        role: xsj
+        role: hotstone.com.cn
       containers:
       - name: jenkins
         image: registry.aliyuncs.com/slzcc/jenkins:2.79

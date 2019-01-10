@@ -20,7 +20,7 @@ spec:
         version: v0.0.1
     spec:
       nodeSelector:
-        role: xsj
+        role: hotstone.com.cn
       containers:
       - name: kodexplorer
         image: daocloud.io/daocloud/kodexplorer
@@ -31,27 +31,10 @@ spec:
         volumeMounts:
           - mountPath: "/var/www/html/data/User/admin/home/VOLUME"
             name: data
-          - mountPath: "/var/www/html/data/Group"
-            name: data2
-          - mountPath: "/var/www/html/data/Group/mirror"
-            name: mirror
-          - mountPath: "/var/www/html"
-            name: config
         env:
         - name: TZ
           value: "Asia/Shanghai"
-      imagePullSecrets:
-        - name: myregistrykey
       volumes:
-        - hostPath:
-            path: "/data/yunpan/data"
-          name: data
-        - hostPath:
-            path: "/var/data/work_dir/mirror"
-          name: mirror
-        - hostPath:
-            path: "/data/yunpan/data/Group"
-          name: data2
-        - hostPath:
-            path: "/data/yunpan/config"
-          name: config
+      - name: data
+        persistentVolumeClaim:
+          claimName: kodexplorer-data

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: onlyoffice
+  namespace: default
+spec:
+  rules:
+  - host: es.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlyoffice
+          servicePort: http

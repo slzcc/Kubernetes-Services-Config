@@ -46,14 +46,29 @@ spec:
           hostPort: 80
         - name: web
           containerPort: 8088
-#          hostPort: 8088
         - name: https
           containerPort: 443
           hostPort: 443
         args:
         - --etcd
         - --etcd.endpoint=127.0.0.1:2379
+        - --api
         - --kubernetes
-       # - --kubernetes
-       # - --kubernetes.endpoint=127.0.0.1:8080
-       # - --etcd.endpoint=101.200.83.130:4001
+        - --logLevel=INFO
+        - --etcd.tls
+        - --etcd.tls.ca=/etc/kubernetes/pki/etcd/ca.crt
+        - --etcd.tls.cert=/etc/kubernetes/pki/etcd/server.crt
+        - --etcd.tls.key=/etc/kubernetes/pki/etcd/server.key
+        volumeMounts:
+        - mountPath: /etc/kubernetes/pki/etcd
+          name: etcd-certs
+        - mountPath: /cert
+          name: ssl-certs
+      volumes:
+      - hostPath:
+          path: /etc/kubernetes/pki/etcd
+          type: DirectoryOrCreate
+        name: etcd-certs
+      - hostPath:
+          path: /mnt
+        name: ssl-certs

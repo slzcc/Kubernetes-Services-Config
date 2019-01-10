@@ -68,6 +68,13 @@ spec:
         backend:
           serviceName: confluence
           servicePort: http
+  - host: jenkins.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginxplus
+          servicePort: http
 
 ---
 apiVersion: extensions/v1beta1

@@ -23,11 +23,10 @@ spec:
         role: shileizcc.com
       containers:
       - name: nginx-mirror
-        image: registry.aliyuncs.com/slzcc/nginx:language-zh
+        image: slzcc/nginx:language-zh
         ports:
         - name: http
           containerPort: 80
-        command: ["nginx", "-g", "daemon off;"]
         volumeMounts:
           - mountPath: "/etc/nginx/sites-available"
             name: config-volume
@@ -43,5 +42,5 @@ spec:
             - key: default.conf
               path: default
         - hostPath:
-            path: "/var/data/work_dir/mirror"
+            path: "/var/data/nfs/nextcloud/data/data/admin/files/mirror"
           name: mirror
