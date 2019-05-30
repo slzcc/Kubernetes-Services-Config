@@ -24,7 +24,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: nginxplus
-        image: slzcc/nginxplus:1.15.7.1
+        image: slzcc/nginxplus:1.15.7.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

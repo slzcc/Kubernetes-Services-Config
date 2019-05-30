@@ -49,8 +49,15 @@ spec:
           containerPort: 443
           hostPort: 443
         args:
+        - --acme
+#        - --acme.storage = "traefik/acme/account"
+#        - --acme.storageFile = "acme.json"
+#        - --acme.onDemand = true
+#        - --acme.entryPoint = "https"
+#        - --acme.OnHostRule = true
         - --etcd
-        - --etcd.endpoint=172.17.145.244:2379
+        - --etcd.endpoint=172.17.145.244:2379,172.17.145.245:2379
+        - --etcd.watch=true
         - --api
         - --kubernetes
         - --logLevel=INFO

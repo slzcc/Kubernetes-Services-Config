@@ -23,7 +23,7 @@ spec:
         role: shileizcc.com
       containers:
       - name: nextcloud
-        image: nextcloud
+        image: nextcloud:15.0.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
