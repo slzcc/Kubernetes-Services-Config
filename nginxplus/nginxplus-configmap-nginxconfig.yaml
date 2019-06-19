@@ -5,89 +5,74 @@ metadata:
   namespace: default
 data:
   nginx.conf: |-
-        user  nginx;
-        worker_processes  auto;
+    user  nginx;
+    worker_processes  auto;
 
-        error_log  /var/log/nginx/error.log notice;
-        pid        /var/run/nginx.pid;
-
-
-        events {
-            worker_connections  10240;
-        }
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
 
 
-        http {
-            include       /etc/nginx/mime.types;
-            default_type  application/octet-stream;
-            limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
-            add_header Access-Control-Allow-Origin *;
-            add_header Access-Control-Allow-Credentials true;
-            add_header Access-Control-Allow-Headers *;
-            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
-
-        #    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-        #                      '$status $body_bytes_sent "$http_referer" '
-        #                      '"$http_user_agent" "$http_x_forwarded_for"';
-        #    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent"$http_referer" "$http_user_agent" [unknown_content];'
-
-            log_format main '$proxy_add_x_forwarded_for | $time_local | $request | $status | $body_bytes_sent | '
-                            '$request_body | $content_length | $http_referer | $http_user_agent | '
-                            '$http_cookie | $remote_addr | $hostname | $upstream_addr | $upstream_response_time | $request_time';
-
-        #    log_format main '$proxy_add_x_forwarded_for | $time_local | $request | $status | $body_bytes_sent | '
-        #                    '"$request_body" | $content_length | "$http_referer" | "$http_user_agent" | '
-        #                    '"$http_cookie" | $remote_addr | $hostname | $upstream_addr | $upstream_response_time | $request_time';
-
-        #    log_format main '$proxy_add_x_forwarded_for | $time_local | "$request" | $status | $body_bytes_sent | '
-        #                    '$content_length | "$http_referer" | "$http_user_agent" | '
-        #                    '"$http_cookie" | $remote_addr | $hostname | $upstream_addr | $upstream_response_time | $request_time';
-
-            access_log  /var/log/nginx/access.log  main;
-
-            sendfile        on;
-            #tcp_nopush     on;
-            client_body_buffer_size 102400;
-            keepalive_timeout  600;
-            #ignore_invalid_headers off;
-            #underscores_in_headers on;
-
-            #gzip  on;
-
-            include /etc/nginx/conf.d/*.conf;
-            limit_req_zone $binary_remote_addr zone=shileizcc_com:10m rate=5r/s;
-        }
+    events {
+        worker_connections  10240;
+    }
 
 
-        # TCP/UDP proxy and load balancing block
-        #
-        #stream {
-            # Example configuration for TCP load balancing
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+        limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Credentials true;
+        add_header Access-Control-Allow-Headers *;
+        add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
 
-            #upstream stream_backend {
-            #    zone tcp_servers 64k;
-            #    server backend1.example.com:12345;
-            #    server backend2.example.com:12345;
-            #}
+        log_format main  escape=json '{ "@timestamp": "$time_local", '
+                             '"remote_addr": "$remote_addr", '
+                             '"upstream_addr": "$upstream_addr",'
+                             '"remote_user": "$remote_user", '
+                             '"body_bytes_sent": "$body_bytes_sent", '
+                             '"request_time": "$request_time", '
+                             '"status": "$status", '
+                             '"request": "$request", '
+                             '"request_method": "$request_method", '
+                             '"http_referrer": "$http_referer", '
+                             '"body_bytes_sent":"$body_bytes_sent", '
+                             '"http_x_forwarded_for": "$http_x_forwarded_for", '
+                             '"host":""$host",'
+                             '"remote_addr":""$remote_addr",'
+                             '"http_user_agent": "$http_user_agent",'
+                             '"http_uri": "$uri",'
+                             '"http_host":"$http_host" }';
 
-            #server {
-            #    listen 12345;
-            #    status_zone tcp_server;
-            #    proxy_pass stream_backend;
-            #}
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile        on;
+        #tcp_nopush     on;
+        client_body_buffer_size 102400;
+        keepalive_timeout  65;
+
+        #gzip  on;
+
+        include /etc/nginx/conf.d/*.conf;
+        limit_req_zone $binary_remote_addr zone=shileizcc_com:10m rate=5r/s;
+    }
+
+
+    # TCP/UDP proxy and load balancing block
+    #
+    #stream {
+        # Example configuration for TCP load balancing
+
+        #upstream stream_backend {
+        #    zone tcp_servers 64k;
+        #    server backend1.example.com:12345;
+        #    server backend2.example.com:12345;
         #}
-        #stream {
-            # Example configuration for TCP load balancing
 
-        #    upstream stream_backend {
-        #        zone tcp_servers 64k;
-        #        server 10.44.0.0:8085;
-        #    }
-
-        #    server {
-        #        listen 80;
-        #        status_zone tcp_server;
-        #        server_name shileizcc.com;
-        #        proxy_pass stream_backend;
-        #    }
+        #server {
+        #    listen 12345;
+        #    status_zone tcp_server;
+        #    proxy_pass stream_backend;
         #}
+    #}

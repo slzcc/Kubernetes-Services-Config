@@ -25,20 +25,20 @@ spec:
         version: v1.0.0
     spec:
       nodeSelector:
-        role: hotstone.com.cn
+        role: shileizcc.com
       terminationGracePeriodSeconds: 60
       serviceAccountName: traefik-ingress-controller
       containers:
       - image: traefik
         imagePullPolicy: IfNotPresent
         name: traefik-ingress-lb
-#        resources:
-#          limits:
-#            cpu: 200m
-#            memory: 50Mi
-#          requests:
-#            cpu: 100m
-#            memory: 20Mi
+        resources:
+          limits:
+            cpu: 200m
+            memory: 50Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi
         ports:
         - name: http
           containerPort: 80

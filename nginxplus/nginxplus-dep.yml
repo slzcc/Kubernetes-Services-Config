@@ -34,6 +34,9 @@ spec:
         volumeMounts:
           - mountPath: "/etc/nginx/conf.d/"
             name: index
+          - mountPath: "/etc/nginx/nginx.conf"
+            name: nginx
+            subPath: nginx.conf
         env:
         - name: TZ
           value: "Asia/Shanghai"
@@ -50,3 +53,9 @@ spec:
                 path: status_password
               - key: secret_password
                 path: secret_password
+        - name: nginx
+          configMap:
+            name: nginxplus-nginx
+            items:
+              - key: nginx.conf
+                path: nginx.conf

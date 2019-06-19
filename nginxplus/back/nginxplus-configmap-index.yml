@@ -23,6 +23,13 @@ data:
 
         server {
                 listen 80;
+                server_name www.shileizcc.com;
+
+                rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+        }
+
+        server {
+                listen 80;
                 server_name 101.200.83.130;
          	rewrite ^(.*) http://wiki.shileizcc.com permanent;
         }
@@ -43,10 +50,10 @@ data:
         #server  kubernetes-dashboard.kube-system.svc.cluster.local service=_http._tcp resolve;
         #}
 
-        upstream gateway {
-        zone upstrean-gateway 64k;
-        server  gateway.default.svc.cluster.local service=_http._tcp resolve;
-        }
+        # upstream gateway {
+        # zone upstrean-gateway 64k;
+        # server  gateway.default.svc.cluster.local service=_http._tcp resolve;
+        # }
 
         #upstream jenkins {
         #zone upstrean-data 64k;
@@ -122,31 +129,31 @@ data:
         # }
 
         ## gateway
-        server  {
-                        listen 80;
-                        status_zone gateway;
-                        server_name www.shileizcc.com;
-                        location  / {
-                            proxy_pass  http://gateway;
-                            proxy_redirect off;
-                            proxy_set_header Host $host;
-                            proxy_set_header X-Real-IP $remote_addr;
-                            proxy_set_header REMOTE-HOST $remote_addr;
-                            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                            client_max_body_size 50m;
-                            client_body_buffer_size 256k;
-                            proxy_connect_timeout 30;
-                            proxy_send_timeout 30;
-                            proxy_read_timeout 60;
-                            proxy_buffer_size 256k;
-                            proxy_buffers 4 256k;
-                            proxy_busy_buffers_size 256k;
-                            proxy_temp_file_write_size 256k;
-                            proxy_max_temp_file_size 128m;
-                            error_page  404 /var/data/logo/T/404.jpg;
-                            error_page  502 /var/data/logo/T/502.png;
-                }
-        }
+        # server  {
+        #                 listen 80;
+        #                 status_zone gateway;
+        #                 server_name www.shileizcc.com;
+        #                 location  / {
+        #                     proxy_pass  http://gateway;
+        #                     proxy_redirect off;
+        #                     proxy_set_header Host $host;
+        #                     proxy_set_header X-Real-IP $remote_addr;
+        #                     proxy_set_header REMOTE-HOST $remote_addr;
+        #                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #                     client_max_body_size 50m;
+        #                     client_body_buffer_size 256k;
+        #                     proxy_connect_timeout 30;
+        #                     proxy_send_timeout 30;
+        #                     proxy_read_timeout 60;
+        #                     proxy_buffer_size 256k;
+        #                     proxy_buffers 4 256k;
+        #                     proxy_busy_buffers_size 256k;
+        #                     proxy_temp_file_write_size 256k;
+        #                     proxy_max_temp_file_size 128m;
+        #                     error_page  404 /var/data/logo/T/404.jpg;
+        #                     error_page  502 /var/data/logo/T/502.png;
+        #         }
+        # }
 
         ## wiki
         server  {
@@ -220,12 +227,12 @@ data:
             #               image_filter_watermark_height_from 400;
                 #       }
 
-            #           location ~* ^.+\.(gif|jpg|png|swf|flv|rar|zip|git)$ {
-            #               valid_referers none blocked server_names *.shileizcc.com shileizcc.com;
-            #               if ($invalid_referer) {
-            #                       rewrite ^/ https://www.shileizcc.com/T/403.png;
-            #               }
-            #           }
+                       location ~* ^.+\.(gif|jpg|png|swf|flv|rar|zip|git)$ {
+                           valid_referers none blocked server_names *.shileizcc.com;
+                           if ($invalid_referer) {
+                                   rewrite ^/ https://www.shileizcc.com/T/403.png;
+                           }
+                       }
                 #       limit_req zone=shileizcc_com burst=12 nodelay;
         }
 
