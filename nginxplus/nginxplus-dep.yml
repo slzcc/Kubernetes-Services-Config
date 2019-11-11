@@ -1,7 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-#  namespace: kube-system
   name: nginxplus
   namespace: default
   labels:
@@ -20,8 +19,8 @@ spec:
         task: nginxplus
         version: v0.0.1
     spec:
-      nodeSelector:
-        role: shileizcc.com
+#      nodeSelector:
+#        role: shileizcc.com
       containers:
       - name: nginxplus
         image: slzcc/nginxplus:1.15.7.2

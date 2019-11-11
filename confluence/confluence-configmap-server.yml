@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   server.xml: |-
-    <Server port="8000" shutdown="SHUTDOWN" debug="0">nfluence/conf# cat server.xml
+    <Server port="8000" shutdown="SHUTDOWN" debug="0">
         <Service name="Tomcat-Standalone">
             <!--
              ==============================================================================================================
