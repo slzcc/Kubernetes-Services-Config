@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: nginxplus-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway
@@ -31,7 +32,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: nginxplus-virtualservice
+  name: istio-system/nginxplus-virtualservice
 spec:
   hosts:
   - "*"
