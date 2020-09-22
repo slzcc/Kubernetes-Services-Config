@@ -35,7 +35,7 @@ metadata:
   name: nginxplus-virtualservice
 spec:
   hosts:
-  - "*.shileizcc.com"
+  - "*"
   gateways:
   - istio-system/nginxplus-gateway
   http:
