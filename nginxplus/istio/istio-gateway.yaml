@@ -18,11 +18,7 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
-    - "shileizcc.com"
-    - "www.shileizcc.com"
-    - "status.shileizcc.com"
-    - "wiki.shileizcc.com"
-    - "mirror.shileizcc.com"
+    - "*.shileizcc.com"
     tls:
       mode: SIMPLE
       serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
