@@ -13,7 +13,7 @@ spec:
       protocol: HTTP
     hosts:
     - "kiali.shileizcc.com"
-    
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -26,12 +26,7 @@ spec:
   hosts:
   - kiali.shileizcc.com
   http:
-  - match:
-    - uri:
-        prefix: /
-    rewrite:
-      uri: /kiali
-    route:
+  - route:
     - destination:
         host: kiali
         port:
