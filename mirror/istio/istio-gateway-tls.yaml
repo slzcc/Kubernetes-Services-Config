@@ -4,7 +4,7 @@ metadata:
   name: mirror-virtualservice
 spec:
   hosts:
-  - "mirror.shileizcc.com"
+  - "*"
   gateways:
   - istio-system/mirror-gateway
   http:

@@ -17,8 +17,6 @@ spec:
         app: mirror
         version: v1
     spec:
-      nodeSelector:
-        role: shileizcc.com
       containers:
       - name: mirror
         image: slzcc/nginx:language-zh
