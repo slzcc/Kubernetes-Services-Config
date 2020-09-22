@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kiali-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "kiali.shileizcc.com"
+    
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali-gateway
+  namespace: istio-system 
+spec:
+  gateways:
+  - kiali-gateway
+  hosts:
+  - kiali.shileizcc.com
+  http:
+  - match:
+    - uri:
+        prefix: /
+    rewrite:
+      uri: /kiali
+    route:
+    - destination:
+        host: kiali
+        port:
+          number: 20001
