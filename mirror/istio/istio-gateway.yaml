@@ -6,7 +6,9 @@ spec:
   hosts:
   - "mirror"
   http:
-  - route:
+  - match:
+    - port: 80
+    route:
     - destination:
         host: mirror
         subset: v1

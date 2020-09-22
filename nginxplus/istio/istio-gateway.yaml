@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  namespace: istio-system
   name: nginxplus-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway
@@ -39,10 +39,13 @@ spec:
   gateways:
   - istio-system/nginxplus-gateway
   http:
-  - route:
+  - match:
+    - port: 80
+    route:
     - destination:
         host: nginxplus
         subset: v1
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
