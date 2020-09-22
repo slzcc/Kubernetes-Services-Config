@@ -1,28 +1,26 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-mirror
+  name: mirror
   namespace: default
   labels:
-    app: cheese
-    cheese: nginx-mirror
+    app: mirror
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cheese
-      task: nginx-mirror
+      app: mirror
   template:
     metadata:
       labels:
-        app: cheese
-        task: nginx-mirror
-        version: v0.0.1
+        app: mirror
+        version: v1
     spec:
       nodeSelector:
         role: shileizcc.com
       containers:
-      - name: nginx-mirror
+      - name: mirror
         image: slzcc/nginx:language-zh
         ports:
         - name: http
@@ -32,15 +30,13 @@ spec:
             name: config-volume
           - mountPath: "/mirror"
             name: mirror
-      imagePullSecrets:
-        - name: myregistrykey
       volumes:
         - name: config-volume
           configMap:
-            name: nginx-mirror
+            name: mirror
             items:
             - key: default.conf
               path: default
         - hostPath:
-            path: "/var/data/nfs/nextcloud/data/data/admin/files/mirror"
+            path: "/var/data/mirror"
           name: mirror

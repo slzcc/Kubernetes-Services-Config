@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: traefik-ingress-controller
   namespace: kube-system
@@ -29,7 +29,7 @@ spec:
       terminationGracePeriodSeconds: 60
       serviceAccountName: traefik-ingress-controller
       containers:
-      - image: traefik
+      - image: traefik:1.1.2
         imagePullPolicy: IfNotPresent
         name: traefik-ingress-lb
         resources:
@@ -56,20 +56,20 @@ spec:
 #        - --acme.entryPoint = "https"
 #        - --acme.OnHostRule = true
         - --etcd
-        - --etcd.endpoint=172.17.145.244:2379,172.17.145.245:2379
+        - --etcd.endpoint=172.17.48.104:2379
         - --etcd.watch=true
-        - --api
+#        - --api
         - --kubernetes
         - --logLevel=INFO
         - --etcd.tls
-        - --etcd.tls.ca=/etc/etcd/ssl/etcd-ca.pem
-        - --etcd.tls.cert=/etc/etcd/ssl/etcd.pem
-        - --etcd.tls.key=/etc/etcd/ssl/etcd-key.pem
+        - --etcd.tls.ca=/etc/kubernetes/pki/etcd/etcd-ca.pem
+        - --etcd.tls.cert=/etc/kubernetes/pki/etcd/etcd.pem
+        - --etcd.tls.key=/etc/kubernetes/pki/etcd/etcd-key.pem
         volumeMounts:
-        - mountPath: /etc/etcd/ssl/
+        - mountPath: /etc/kubernetes/pki/etcd/
           name: etcd-certs
       volumes:
       - hostPath:
-          path: /etc/etcd/ssl/
+          path: /etc/kubernetes/pki/etcd/
           type: DirectoryOrCreate
         name: etcd-certs

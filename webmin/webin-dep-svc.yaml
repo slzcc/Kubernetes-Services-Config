@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webmin
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webmin
+  template:
+    metadata:
+      labels:
+        app: webmin
+    spec:
+      initContainers:
+      - name: data
+        image: slzcc/webmin:1.900
+        command:
+        - bash
+        - "/initialize.sh"
+        volumeMounts:
+        - name: datadir
+          mountPath: "/mnt/data"
+        - name: etcdir
+          mountPath: "/mnt/etc"
+        - name: vardir
+          mountPath: "/mnt/var"
+        - name: usrdir
+          mountPath: "/mnt/usr"
+        - name: script
+          mountPath: "/initialize.sh"
+          subPath: initialize.sh
+      containers:
+      - name: webmin
+        image: slzcc/webmin:1.900
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        - name: dns
+          containerPort: 53
+        volumeMounts:
+        - name: datadir
+          mountPath: "/data"
+        - name: etcdir
+          mountPath: "/etc"
+        - name: vardir
+          mountPath: "/var"
+        - name: usrdir
+          mountPath: "/usr"
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+        - name: ROOT_PASSWORD
+          value: webmin.ops.shileizcc.com
+        imagePullPolicy: IfNotPresent
+      volumes:
+      - name: datadir
+        emptyDir: {}
+      - name: etcdir
+        emptyDir: {}
+      - name: vardir
+        emptyDir: {}
+      - name: usrdir
+        emptyDir: {}
+      - name: script
+        configMap:
+          name: webmin-initialize
+          items:
+            - key: initialize.sh
+              path: initialize.sh
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webmin-initialize
+  namespace: default
+data:
+  initialize.sh: |-
+    #!/bin/bash
+    if [ "`ls /mnt/etc`" == "" ];then
+      mkdir -p /mnt/{etc,usr,var,data}
+      cp -a /etc/* /mnt/etc/
+      cp -a /usr/* /mnt/usr/
+      cp -a /var/* /mnt/var/
+      cp -a /data/* /mnt/data/
+    fi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webmin
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  - name: tdnp
+    port: 53
+    targetPort: 53
+    protocol: TCP
+    nodePort: 53
+  - name: udns
+    port: 53
+    targetPort: 53
+    protocol: UDP
+    nodePort: 53
+  selector:
+    app: webmin
+ 
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: webmin
+spec:
+  rules:
+  - host: webmin.ops.shileizcc.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: webmin
+          servicePort: http

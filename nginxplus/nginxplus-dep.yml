@@ -1,47 +1,46 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginxplus
   namespace: default
   labels:
-    app: cheese
-    cheese: nginxplus
+    app: nginxplus
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cheese
-      task: nginxplus
+      app: nginxplus
   template:
     metadata:
       labels:
-        app: cheese
-        task: nginxplus
-        version: v0.0.1
+        app: nginxplus
+        version: v1
     spec:
-#      nodeSelector:
-#        role: shileizcc.com
       containers:
       - name: nginxplus
-        image: slzcc/nginxplus:1.15.7.2
+        image: slzcc/nginxplus:1.19.0
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 80
         - name: https
           containerPort: 443
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
         volumeMounts:
           - mountPath: "/etc/nginx/conf.d/"
             name: index
           - mountPath: "/etc/nginx/nginx.conf"
             name: nginx
             subPath: nginx.conf
-        env:
-        - name: TZ
-          value: "Asia/Shanghai"
-      imagePullSecrets:
-        - name: myregistrykey
+          - mountPath: "/mnt/www/challenges/"
+            name: data
       volumes:
+        - hostPath:
+            path: "/mnt/www/challenges/"
+          name: data
         - name: index
           configMap:
             name: nginxplus-index

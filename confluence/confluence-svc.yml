@@ -18,5 +18,4 @@ spec:
      targetPort: 8091
      protocol: TCP
   selector:
-    app: cheese
-    task: confluence
+    app: confluence

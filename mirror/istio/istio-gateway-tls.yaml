@@ -1,0 +1,57 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mirror-virtualservice
+spec:
+  hosts:
+  - "mirror.shileizcc.com"
+  gateways:
+  - istio-system/mirror-gateway
+  http:
+  - match:
+    - port: 80
+    route:
+    - destination:
+        host: mirror
+        port:
+          number: 80
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mirror-destinationrule
+spec:
+  host: mirror
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: mirror-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "mirror.shileizcc.com"
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "mirror.shileizcc.com"
+    tls:
+      mode: SIMPLE
+      serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
+      privateKey: "/etc/istio/ingressgateway-certs/tls.key"
+

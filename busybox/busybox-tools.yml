@@ -1,8 +1,8 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: busybox
-  namespace: default
+  namespace: limit-example
 spec:
   replicas: 1
   selector:
@@ -16,8 +16,8 @@ spec:
         task:  busybox
         version: v0.0.1
     spec:
-      nodeSelector:
-        role: hotstone.com.cn
+            #      nodeSelector:
+            #        role: shileizcc.com
       containers:
       - image: slzcc/ansible:demo4
         command:
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: busybox
-  namespace: default
+  namespace: limit-example
 spec:
   ports:
   - port: 80
