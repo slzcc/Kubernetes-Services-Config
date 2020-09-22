@@ -32,12 +32,12 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: istio-system/nginxplus-virtualservice
+  name: nginxplus-virtualservice
 spec:
   hosts:
   - "*"
   gateways:
-  - nginxplus-gateway
+  - istio-system/nginxplus-gateway
   http:
   - route:
     - destination:
