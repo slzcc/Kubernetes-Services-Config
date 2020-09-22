@@ -44,13 +44,6 @@ spec:
         - name: index
           configMap:
             name: nginxplus-index
-            items:
-              - key: index.conf
-                path: index.conf
-              - key: status_password
-                path: status_password
-              - key: secret_password
-                path: secret_password
         - name: nginx
           configMap:
             name: nginxplus-nginx
