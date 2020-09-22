@@ -43,8 +43,6 @@ data:
         status_zone wiki;
         server_name wiki.shileizcc.com;
 
-        proxy_http_version 1.1;
-
         location  / {
             rewrite ^(.*) https://wiki.shileizcc.com/confluence$1 last;
             #  禁止非GET|HEAD|POST方式的抓取
@@ -56,6 +54,7 @@ data:
             }
         }
         location /confluence {
+            proxy_http_version 1.1;
             client_max_body_size 100m;
             proxy_set_header X-Forwarded-Host $host;
             proxy_set_header X-Forwarded-Server $host;
@@ -72,6 +71,7 @@ data:
             proxy_temp_file_write_size 256k;
         }
         location /synchrony {
+            proxy_http_version 1.1;
             proxy_set_header X-Forwarded-Host $host;
             proxy_set_header X-Forwarded-Server $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -98,10 +98,9 @@ data:
         listen 80;
         status_zone mirror;
         server_name mirror.shileizcc.com;
-        
-        proxy_http_version 1.1;
 
         location  / {
+            proxy_http_version 1.1;
             proxy_pass  http://mirror;
             proxy_redirect off;
             proxy_set_header Host $host;
