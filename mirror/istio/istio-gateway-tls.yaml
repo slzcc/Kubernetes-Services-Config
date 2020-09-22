@@ -8,13 +8,9 @@ spec:
   gateways:
   - istio-system/mirror-gateway
   http:
-  - match:
-    - port: 80
-    route:
+  - route:
     - destination:
         host: mirror
-        port:
-          number: 80
         subset: v1
 
 ---
@@ -28,6 +24,7 @@ spec:
   - name: v1
     labels:
       version: v1
+      
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -54,4 +51,3 @@ spec:
       mode: SIMPLE
       serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
       privateKey: "/etc/istio/ingressgateway-certs/tls.key"
-
