@@ -12,7 +12,9 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*.shileizcc.com"
+    - "status.shileizcc.com"
+    - "wiki.shileizcc.com"
+    - "mirror.shileizcc.com"
   - port:
       number: 443
       name: https
@@ -33,12 +35,9 @@ metadata:
   name: nginxplus-virtualservice
 spec:
   hosts:
-  - "mirror.shileizcc.com"
-  - "wiki.shileizcc.com"
-  - "status.shileizcc.com"
+  - "*"
   gateways:
   - istio-system/nginxplus-gateway
-  - mesh
   http:
   - route:
     - destination:
