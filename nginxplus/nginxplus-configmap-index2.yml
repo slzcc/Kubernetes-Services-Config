@@ -81,12 +81,12 @@ data:
     }
 
   mirror.conf: |-
-    resolver 10.16.0.10 valid=1s;
-    upstream mirror {
-        zone upstrean-mirror 64k;
-        #server  mirror.default.svc.cluster.local service=_http._tcp resolve;
-        server  mirror max_fails=2 fail_timeout=30s weight=10;
-    }
+    #resolver 10.16.0.10 valid=1s;
+    # upstream mirror {
+    #     zone upstrean-mirror 64k;
+    #     #server  mirror.default.svc.cluster.local service=_http._tcp resolve;
+    #     server  mirror max_fails=2 fail_timeout=30s weight=10;
+    # }
 
     ## mirror
     server  {
@@ -94,7 +94,7 @@ data:
         status_zone mirror;
         server_name mirror.shileizcc.com;
         location  / {
-            proxy_pass  http://mirror;
+            proxy_pass  http://mirror.default;
             proxy_redirect off;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
