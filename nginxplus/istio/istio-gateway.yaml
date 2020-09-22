@@ -39,9 +39,7 @@ spec:
   gateways:
   - istio-system/nginxplus-gateway
   http:
-  - match:
-    - port: 80
-    route:
+  - route:
     - destination:
         host: nginxplus
         subset: v1
