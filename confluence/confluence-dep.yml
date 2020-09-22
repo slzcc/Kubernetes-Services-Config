@@ -17,8 +17,6 @@ spec:
         app: confluence
         version: v1
     spec:
-      nodeSelector:
-        role: shileizcc.com
       containers:
       - name: confluence
         image: slzcc/confluence:7.4.0

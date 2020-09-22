@@ -1,6 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
+  namespace: istio-system
   name: nginxplus-gateway
 spec:
   selector:
@@ -36,7 +37,7 @@ spec:
   - "wiki.shileizcc.com"
   - "status.shileizcc.com"
   gateways:
-  - nginxplus-gateway.default.svc.cluster.local
+  - istio-system/nginxplus-gateway
   - mesh
   http:
   - route:
