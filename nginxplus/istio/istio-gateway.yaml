@@ -12,14 +12,14 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "status.shileizcc.com"
-    - "wiki.shileizcc.com"
-    - "mirror.shileizcc.com"
+    - "*.shileizcc.com"
   - port:
       number: 443
       name: https
       protocol: HTTPS
     hosts:
+    - "shileizcc.com"
+    - "www.shileizcc.com"
     - "status.shileizcc.com"
     - "wiki.shileizcc.com"
     - "mirror.shileizcc.com"

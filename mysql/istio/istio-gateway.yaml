@@ -1,23 +1,25 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: confluence-virtualservice
+  name: mysql-virtualservice
 spec:
   hosts:
-  - "confluence"
-  http:
+  - "*"
+  tcp:
   - route:
     - destination:
-        host: confluence
+        host: mysql
+        port:
+          number: 3306
         subset: v1
 
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: confluence-destinationrule
+  name: mysql-destinationrule
 spec:
-  host: confluence
+  host: mysql
   subsets:
   - name: v1
     labels:

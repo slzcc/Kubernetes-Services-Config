@@ -3,9 +3,12 @@ kind: Service
 metadata:
   name: mysql
   namespace: default
+  labels:
+    app: mysql
+    service: mysql
 spec:
   ports:
-   - name: http
+   - name: tcp
      port: 3306
      protocol: TCP 
   selector:

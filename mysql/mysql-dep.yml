@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app: mysql
-        version: v0.0.1
+        version: v1
     spec:
       nodeSelector:
         role: shileizcc.com

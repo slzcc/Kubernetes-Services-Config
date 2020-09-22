@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: confluence
   namespace: default
+  labels:
+    app: confluence
+    service: confluence
 spec:
   ports:
    - name: http

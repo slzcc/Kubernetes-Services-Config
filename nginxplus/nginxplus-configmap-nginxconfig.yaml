@@ -20,7 +20,7 @@ data:
     http {
         include       /etc/nginx/mime.types;
         default_type  application/octet-stream;
-        limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
+        
         add_header Access-Control-Allow-Origin *;
         add_header Access-Control-Allow-Credentials true;
         add_header Access-Control-Allow-Headers *;
@@ -52,9 +52,11 @@ data:
         client_body_buffer_size 102400;
         keepalive_timeout  65;
 
-        #gzip  on;
+        gzip  on;
 
         include /etc/nginx/conf.d/*.conf;
+        
+        limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
         limit_req_zone $binary_remote_addr zone=shileizcc_com:10m rate=5r/s;
     }
 

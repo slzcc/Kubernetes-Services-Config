@@ -7,6 +7,7 @@ data:
   acme_registry.conf: |-
     ## Registry TLS
     server {
+        
         listen 80;
         location ^~ /.well-known/acme-challenge/ {
             alias /mnt/www/challenges/;
@@ -17,13 +18,14 @@ data:
         }
     }
         
-  wiki.conf.back: |-
+  wiki.conf: |-
     resolver 10.16.0.10 valid=1s;
-    # server {
-    #     listen 80;
-    #     server_name shileizcc.com;
-    #     rewrite  ^(.*) http://wiki.shileizcc.com permanent;
-    # }
+
+    server {
+        listen 80;
+        server_name shileizcc.com www.shileizcc.com;
+        rewrite  ^(.*) http://wiki.shileizcc.com permanent;
+    }
 
     upstream wiki {
        zone upstrean-wiki 64k;
@@ -36,9 +38,13 @@ data:
 
     ## wiki
     server  {
+        
         listen 80;
         status_zone wiki;
         server_name wiki.shileizcc.com;
+
+        proxy_http_version 1.1;
+
         location  / {
             rewrite ^(.*) https://wiki.shileizcc.com/confluence$1 last;
             #  禁止非GET|HEAD|POST方式的抓取
@@ -89,11 +95,14 @@ data:
 
     ## mirror
     server  {
+        
         listen 80;
         status_zone mirror;
         server_name mirror.shileizcc.com;
+        
+        proxy_http_version 1.1;
+
         location  / {
-            proxy_http_version 1.1;
             proxy_pass  http://mirror;
             proxy_redirect off;
             proxy_set_header Host $host;
