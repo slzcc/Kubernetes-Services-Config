@@ -87,11 +87,9 @@ data:
     }
 
   mirror.conf: |-
-    resolver 10.16.0.10 valid=1s;
-
     upstream mirror {
         zone upstrean-mirror 64k;
-        server  mirror.default.svc.cluster.local service=_http._tcp resolve;
+        server mirror.default.svc.cluster.local service=_http._tcp resolve;
     }
 
     ## mirror
