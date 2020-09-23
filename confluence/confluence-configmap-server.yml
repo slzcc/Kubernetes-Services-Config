@@ -14,11 +14,8 @@ data:
              If using a http/https proxy, comment out this connector.
              ==============================================================================================================
             -->
-            <Connector port="8090" connectionTimeout="20000" redirectPort="8443"
-                       maxThreads="48" minSpareThreads="10"
-                       enableLookups="false" acceptCount="10" debug="0" URIEncoding="UTF-8"
-                       protocol="org.apache.coyote.http11.Http11NioProtocol" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
-                       proxyName="wiki.shileizcc.com" proxyPort="443" scheme="https" secure="true"/>
+            <Connector port="8090" connectionTimeout="20000" maxThreads="48" minSpareThreads="10" protocol="HTTP/1.1"
+                       enableLookups="false" acceptCount="10" debug="0" URIEncoding="UTF-8" secure="true"/>
 
             <!--
              ==============================================================================================================
