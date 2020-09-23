@@ -12,13 +12,21 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*.shileizcc.com"
+    - "shileizcc.com"
+    - "wiki.shileizcc.com"
+    - "status.shileizcc.com"
+    - "www.shileizcc.com"
+    - "mirror.shileizcc.com"
   - port:
       number: 443
       name: https
       protocol: HTTPS
     hosts:
-    - "*.shileizcc.com"
+    - "shileizcc.com"
+    - "wiki.shileizcc.com"
+    - "status.shileizcc.com"
+    - "www.shileizcc.com"
+    - "mirror.shileizcc.com"
     tls:
       mode: SIMPLE
       serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
@@ -31,7 +39,11 @@ metadata:
   name: nginxplus-virtualservice
 spec:
   hosts:
-  - "*"
+  - "shileizcc.com"
+  - "wiki.shileizcc.com"
+  - "status.shileizcc.com"
+  - "www.shileizcc.com"
+  - "mirror.shileizcc.com"
   gateways:
   - istio-system/nginxplus-gateway
   http:
