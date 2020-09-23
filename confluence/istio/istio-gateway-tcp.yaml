@@ -60,7 +60,7 @@ spec:
   hosts:
   - "*"
   gateways:
-  - confluence
+  - confluence-gateway
   tcp:
   - route:
     - destination:
