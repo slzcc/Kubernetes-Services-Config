@@ -5,8 +5,6 @@ metadata:
 spec:
   hosts:
   - "wiki.hotstone.com.cn"
-  gateways:
-  - istio-system/confluence-gateway
   http:
   - route:
     - destination:
