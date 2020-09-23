@@ -9,8 +9,6 @@ spec:
   - route:
     - destination:
         host: mysql
-        port:
-          number: 3306
         subset: v1
 
 ---
