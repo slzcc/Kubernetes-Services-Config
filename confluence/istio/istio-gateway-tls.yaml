@@ -31,7 +31,7 @@ metadata:
   name: confluence-virtualservice
 spec:
   hosts:
-  - "*"
+  - "confluence"
   gateways:
   - istio-system/confluence-gateway
   http:
@@ -67,7 +67,7 @@ metadata:
   name: confluence-synchrony-proxy-virtualservice
 spec:
   hosts:
-  - "*"
+  - "confluence-synchrony-proxy"
   http:
   - route:
     - destination:
@@ -75,7 +75,7 @@ spec:
         port:
           number: 8091
         subset: v1
-        
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
