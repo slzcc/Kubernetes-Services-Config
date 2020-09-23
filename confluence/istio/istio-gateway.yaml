@@ -4,7 +4,7 @@ metadata:
   name: confluence-virtualservice
 spec:
   hosts:
-  - "wiki.hotstone.com.cn"
+  - "wiki.shileizcc.com"
   http:
   - route:
     - destination:
