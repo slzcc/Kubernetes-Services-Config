@@ -17,7 +17,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: mysql
+  name: mysql-vritualservice
 spec:
   gateways:
   - "mysql-gateway"
