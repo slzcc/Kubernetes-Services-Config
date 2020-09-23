@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway
   servers:
   - port:
-      name: mysql.default.svc.cluster.local
+      name: mysql
       number: 3306
       protocol: TCP
     hosts:
