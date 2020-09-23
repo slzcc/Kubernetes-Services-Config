@@ -9,13 +9,55 @@ spec:
   - route:
     - destination:
         host: confluence
+        port:
+          number: 8090
         subset: v1
+  - match:
+    - uri:
+        prefix: /synchrony-proxy
+    redirect:
+      uri: /synchrony-proxy
+      authority: confluence-synchrony-proxy.defaults.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: confluence-destinationrule
+spec:
+  host: confluence
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: confluence-synchrony-proxy-virtualservice
+spec:
+  hosts:
+  - "confluence"
+  http:
+  - route:
+    - destination:
+        host: confluence
+        port:
+          number: 8091
+        subset: v1
+  - match:
+    - uri:
+        prefix: /synchrony-proxy
+    redirect:
+      uri: /synchrony-proxy
+      authority: confluence-synchrony-proxy.defaults.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: confluence-synchrony-proxy-destinationrule
 spec:
   host: confluence
   subsets:
