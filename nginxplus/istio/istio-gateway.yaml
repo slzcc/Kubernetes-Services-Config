@@ -12,21 +12,13 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "shileizcc.com"
-    - "wiki.shileizcc.com"
-    - "status.shileizcc.com"
-    - "www.shileizcc.com"
-    - "mirror.shileizcc.com"
+    - "*.shileizcc.com"
   - port:
       number: 443
       name: https
       protocol: HTTPS
     hosts:
-    - "shileizcc.com"
-    - "wiki.shileizcc.com"
-    - "status.shileizcc.com"
-    - "www.shileizcc.com"
-    - "mirror.shileizcc.com"
+    - "*.shileizcc.com"
     tls:
       mode: SIMPLE
       serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
