@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: confluence
+  namespace: default
+  labels:
+    app: confluence
+    service: confluence
+spec:
+  ports:
+   - name: tcp
+     port: 8090
+     targetPort: 8090
+     protocol: TCP
+   - name: interaction
+     port: 8000
+     targetPort: 8000
+     protocol: TCP
+   - name: synchrony
+     port: 8091
+     targetPort: 8091
+     protocol: TCP
+  selector:
+    app: confluence
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: confluence-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 31400
+      name: tcp
+      protocol: TCP
+    hosts:
+    - "wiki.hotstone.com.cn"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: confluence-destination
+spec:
+  host: confluence
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: confluence-virtualservice
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - confluence
+  tcp:
+  - route:
+    - destination:
+        host: confluence
+        port:
+          number: 8090
+        subset: v1
