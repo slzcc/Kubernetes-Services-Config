@@ -22,7 +22,7 @@ spec:
   gateways:
   - "mysql-gateway"
   hosts: # The host fields seems to only be used to match the Gateway.
-  - '*' # I'm using '*', the listener created is listing on 0.0.0.0
+  - 'mysql' # I'm using '*', the listener created is listing on 0.0.0.0
   tcp:
   - match:
       - port: 3306
