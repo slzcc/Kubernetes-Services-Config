@@ -1,0 +1,70 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: harbor-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "harbor.hotstone.com.cn"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: harbor-virtualservice
+  namespace: istio-system 
+spec:
+  gateways:
+  - harbor-gateway
+  hosts:
+  - harbor.hotstone.com.cn
+  http:
+  - match:
+    - uri:
+        prefix: /
+    redirect:
+      uri: /
+      authority: release-name-harbor-portal.harbor.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /api/
+    redirect:
+      uri: /api/
+      authority: release-name-harbor-core.harbor.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /service/
+    redirect:
+      uri: /service/
+      authority: release-name-harbor-core.harbor.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /v2/
+    redirect:
+      uri: /v2/
+      authority: release-name-harbor-core.harbor.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /chartrepo/
+    redirect:
+      uri: /chartrepo/
+      authority: release-name-harbor-core.harbor.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /c/
+    redirect:
+      uri: /c/
+      authority: release-name-harbor-core.harbor.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: harbor
+        port:
+          number: 20001

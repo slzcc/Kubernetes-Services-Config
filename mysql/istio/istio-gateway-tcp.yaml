@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: mysql-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      name: mysql
+      number: 3306
+      protocol: TCP
+    hosts:
+    - "mysql"
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mysql
+spec:
+  gateways:
+  - "mysql-gateway"
+  hosts: # The host fields seems to only be used to match the Gateway.
+  - '*' # I'm using '*', the listener created is listing on 0.0.0.0
+  tcp:
+  - match:
+      - port: 3306
+    route:
+    - destination:
+        host: mysql.default.svc.cluster.local
+        port:
+          number: 3306
