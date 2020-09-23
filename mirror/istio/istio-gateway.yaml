@@ -4,7 +4,7 @@ metadata:
   name: mirror-virtualservice
 spec:
   hosts:
-  - "mirror"
+  - "mirror.shileizcc.com"
   http:
   - route:
     - destination:
