@@ -17,8 +17,6 @@ spec:
         app: mysql
         version: v1
     spec:
-      nodeSelector:
-        role: shileizcc.com
       containers:
        - image: registry.aliyuncs.com/slzcc/mysql-5.6
          name: mysql
