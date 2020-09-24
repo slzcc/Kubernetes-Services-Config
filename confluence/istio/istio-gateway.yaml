@@ -12,13 +12,13 @@ spec:
         port:
           number: 8090
         subset: v1
-       headers:
+      headers:
         request:
           remove:
             - x-b3-sampled
           add: 
             x-b3-sampled: '0'
-            
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
