@@ -45,7 +45,13 @@ spec:
     - destination:
         host: nginxplus
         subset: v1
-
+    headers:
+        request:
+          remove:
+            - x-b3-sampled
+          add: 
+            x-b3-sampled: '0'
+            
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
