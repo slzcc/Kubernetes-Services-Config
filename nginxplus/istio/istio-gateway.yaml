@@ -12,6 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
+    - "shileizcc.com"
     - "*.shileizcc.com"
     tls:
       httpsRedirect: true
@@ -20,6 +21,7 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
+    - "shileizcc.com"
     - "*.shileizcc.com"
     tls:
       mode: SIMPLE
