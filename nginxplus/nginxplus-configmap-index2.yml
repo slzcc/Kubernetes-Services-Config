@@ -19,7 +19,6 @@ data:
     }
         
   wiki.conf: |-
-    resolver 10.16.0.10 valid=1s;
 
     server {
         listen 80;
@@ -44,7 +43,9 @@ data:
         server_name wiki.shileizcc.com;
 
         location  / {
-            rewrite ^(.*) https://wiki.shileizcc.com/confluence$1 last;
+            
+            return 301 /confluence;
+
             #  禁止非GET|HEAD|POST方式的抓取
             if ($request_method !~ ^(GET|HEAD|POST)$) {
             return 403;

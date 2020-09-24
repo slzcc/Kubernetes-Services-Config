@@ -58,6 +58,8 @@ data:
         
         limit_req_zone $binary_remote_addr zone=allips:10m rate=20r/s;
         limit_req_zone $binary_remote_addr zone=shileizcc_com:10m rate=5r/s;
+
+        resolver 10.16.0.10 valid=1s;
     }
 
 
