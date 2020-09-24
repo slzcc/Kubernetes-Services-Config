@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bosybox
+  template:
+    metadata:
+      labels:
+        app: bosybox
+    spec:
+      containers:
+      - image: slzcc/ansible:demo4
+        command:
+          - sleep
+          - "3600000"
+        name: busybox
+      restartPolicy: Always

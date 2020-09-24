@@ -80,10 +80,19 @@ data:
                        protocol="org.apache.coyote.http11.Http11NioProtocol"
                        scheme="https" secure="true" proxyName="<subdomain>.<domain>.com" proxyPort="443"/>
             -->
-
+            
             <Engine name="Standalone" defaultHost="wiki.shileizcc.com" debug="0">
                 <Host name="wiki.shileizcc.com" debug="0" appBase="webapps" unpackWARs="true" autoDeploy="false" startStopThreads="4">
-                    <Context path="/confluence" docBase="../confluence" debug="0" reloadable="false">
+                    <Context path="/confluence" docBase="../confluence" debug="0" reloadable="false" useHttpOnly="true">
+                        <!-- Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
+                        <Manager pathname=""/>
+                        <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve" threshold="60"/>
+                    </Context>
+
+                    <Context path="${confluence.context.path}/synchrony-proxy" docBase="../synchrony-proxy" debug="0"
+                             reloadable="false" useHttpOnly="true">
+                        <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve" threshold="60"/>
+                    </Context>
                 </Host>
             </Engine>
         </Service>
