@@ -13,7 +13,7 @@ spec:
         app: bosybox
     spec:
       containers:
-      - image: slzcc/ansible:demo4
+      - image: slzcc/terminal-ctl:ubuntu-20.14
         command:
           - sleep
           - "3600000"
