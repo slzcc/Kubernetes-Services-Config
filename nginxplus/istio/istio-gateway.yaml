@@ -25,8 +25,7 @@ spec:
     - "*.shileizcc.com"
     tls:
       mode: SIMPLE
-      serverCertificate: "/etc/istio/ingressgateway-certs/tls.crt"
-      privateKey: "/etc/istio/ingressgateway-certs/tls.key"
+      credentialName: shileizcc-tls
 
 ---
 apiVersion: networking.istio.io/v1alpha3
