@@ -14,6 +14,7 @@ spec:
     hosts:
     - "shileizcc.com"
     - "*.shileizcc.com"
+    - "nginxplus.default"
     tls:
       httpsRedirect: true
   - port:
@@ -23,6 +24,7 @@ spec:
     hosts:
     - "shileizcc.com"
     - "*.shileizcc.com"
+    - "nginxplus.default"
     tls:
       mode: SIMPLE
       credentialName: shileizcc-tls
@@ -34,11 +36,12 @@ metadata:
   name: nginxplus-virtualservice
 spec:
   hosts:
-  - "shileizcc.com"
-  - "wiki.shileizcc.com"
-  - "status.shileizcc.com"
-  - "www.shileizcc.com"
-  - "mirror.shileizcc.com"
+  - shileizcc.com
+  - wiki.shileizcc.com
+  - status.shileizcc.com
+  - www.shileizcc.com
+  - mirror.shileizcc.com
+  - nginxplus.default
   gateways:
   - istio-system/nginxplus-gateway
   http:
@@ -59,7 +62,7 @@ kind: DestinationRule
 metadata:
   name: nginxplus-destinationrule
 spec:
-  host: nginxplus
+  host: nginxplus.default
   subsets:
   - name: v1
     labels:

@@ -4,7 +4,7 @@ metadata:
   name: confluence-virtualservice
 spec:
   hosts:
-  - "confluence"
+  - confluence.default
   http:
   - route:
     - destination:
@@ -25,7 +25,7 @@ kind: DestinationRule
 metadata:
   name: confluence-destinationrule
 spec:
-  host: confluence
+  host: confluence.default
   subsets:
   - name: v1
     labels:

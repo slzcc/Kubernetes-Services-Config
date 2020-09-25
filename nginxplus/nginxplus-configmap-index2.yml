@@ -19,13 +19,6 @@ data:
     }
         
   wiki.conf: |-
-
-    server {
-        listen 80;
-        server_name shileizcc.com www.shileizcc.com;
-        rewrite  ^(.*) http://wiki.shileizcc.com permanent;
-    }
-
     upstream wiki {
         zone upstrean-wiki 64k;
         server  confluence.default.svc.cluster.local service=_http._tcp resolve;
