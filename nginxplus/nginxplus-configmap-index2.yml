@@ -124,8 +124,13 @@ data:
     ## status
     server {
         listen 80;
+        status_zone status;
         server_name status.shileizcc.com;
         
+        location ^~ /.well-known/acme-challenge/ {
+            alias /mnt/www/challenges/;
+            try_files $uri =404;
+        }
         location / {
             return 301 /dashboard.html;
         }
@@ -140,7 +145,6 @@ data:
         location = /dashboard.html {
             root   /usr/share/nginx/html;
         }
-
         # Redirect requests made to the old dashboard
         location = /status.html {
             return 301 /dashboard.html;
@@ -148,10 +152,7 @@ data:
         location /swagger-ui {
             root   /usr/share/nginx/html;
         }
-        location ^~ /.well-known/acme-challenge/ {
-            alias /mnt/www/challenges/;
-            try_files $uri =404;
-        }
+        
     }
 
   status_password:
