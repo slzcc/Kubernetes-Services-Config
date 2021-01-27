@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: limit-request-size
+  namespace: istio-system
+spec:
+  workloadSelector:
+    labels:
+      istio: inressgateway
+  configPatches:
+  - applyTo: HTTP_FILTER
+    match:
+      context: GATEWAY
+      listener:
+        filterChain:
+          filter:
+            name: envoy.http_connection_manager
+    patch:
+      operation: INSERT_BEFORE
+      value:
+        name: envoy.buffer
+        typed_config:
+          '@type': type.googleapis.com/udpa.type.v1.TypedStruct
+          value:
+            maxRequestBytes: 10487600  # 100MB

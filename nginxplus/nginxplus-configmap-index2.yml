@@ -81,6 +81,10 @@ data:
             alias /mnt/www/challenges/;
             try_files $uri =404;
         }
+        location /rest/analytics/1.0/publish/bulk {
+            deny all;
+            return 200;
+       }
     }
 
   mirror.conf: |-
