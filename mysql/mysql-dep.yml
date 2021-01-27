@@ -18,20 +18,27 @@ spec:
         version: v1
     spec:
       containers:
-       - image: registry.aliyuncs.com/slzcc/mysql-5.6
-         name: mysql
-         env:
-         - name: MYSQL_ROOT_PASSWORD
-           value: Chengcheng_slzcc
-         ports:
-         - containerPort: 3306
-           name: mysql
-         volumeMounts:
-         - mountPath: "/var/lib/mysql"
-           name: data
-         - mountPath: "/etc/mysql/conf.d"
-           name: config-volume
+      - image: registry.aliyuncs.com/slzcc/mysql-5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: Chengcheng_slzcc
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: data
+        - mountPath: "/etc/mysql/conf.d"
+          name: config-volume
+        - mountPath: /usr/share/zoneinfo
+          name: usr-local-timezone
+          readOnly: true
       volumes:
+      - name: usr-local-timezone
+        hostPath:
+          path: /usr/share/zoneinfo
+          type: DirectoryOrCreate
       - name: data
         hostPath:
           path: "/var/data/mysql"

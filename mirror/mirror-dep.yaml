@@ -28,7 +28,14 @@ spec:
             name: config-volume
           - mountPath: "/mirror"
             name: mirror
+          - mountPath: /usr/share/zoneinfo
+            name: usr-local-timezone
+            readOnly: true
       volumes:
+        - name: usr-local-timezone
+          hostPath:
+            path: /usr/share/zoneinfo
+            type: DirectoryOrCreate
         - name: config-volume
           configMap:
             name: mirror

@@ -35,7 +35,14 @@ spec:
             subPath: nginx.conf
           - mountPath: "/mnt/www/challenges/"
             name: data
+          - mountPath: /usr/share/zoneinfo
+            name: usr-local-timezone
+            readOnly: true
       volumes:
+        - name: usr-local-timezone
+          hostPath:
+            path: /usr/share/zoneinfo
+            type: DirectoryOrCreate
         - hostPath:
             path: "/mnt/www/challenges/"
           name: data
