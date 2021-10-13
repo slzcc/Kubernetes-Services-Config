@@ -35,7 +35,7 @@ spec:
           name: config
           subPath: server.xml
         - mountPath: "/opt/atlassian/confluence/conf/setenv.sh"
-          name: setenv
+          name: config
           subPath: setenv.sh
         - mountPath: /usr/share/zoneinfo
           name: usr-local-timezone
