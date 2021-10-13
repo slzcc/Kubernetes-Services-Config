@@ -43,6 +43,9 @@ spec:
         env:
         - name: TZ
           value: "Asia/Shanghai"
+        - name: LC_ALL
+          value: "en_US.UTF-8"
+          #value: "zh_CN.utf-8"
       volumes:
       - name: usr-local-timezone
         hostPath:
