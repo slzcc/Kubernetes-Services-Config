@@ -4,14 +4,14 @@ metadata:
   name: nginxplus-index
   namespace: default
 data:
-  billance.shileizcc.com.conf: |
+  www.shileizcc.com.conf: |
     upstream server_zendesk {
         server 104.16.51.111 weight=1 max_fails=3 fail_timeout=8s;
         server 104.16.53.111 weight=1 max_fails=3 fail_timeout=8s;
     }
     server {
         listen 80;
-        server_name billance.shileizcc.com;
+        server_name www.shileizcc.com;
 
         location / {
             proxy_next_upstream http_502 http_504 error timeout invalid_header;

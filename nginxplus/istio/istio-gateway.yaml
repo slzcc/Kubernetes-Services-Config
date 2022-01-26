@@ -39,7 +39,6 @@ spec:
   - status.shileizcc.com
   - www.shileizcc.com
   - mirror.shileizcc.com
-  - "*.shileizcc.com"
   gateways:
   - istio-system/nginxplus-gateway
   http:
