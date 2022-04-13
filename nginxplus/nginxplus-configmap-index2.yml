@@ -54,7 +54,7 @@ data:
         
         listen 80;
         status_zone wiki;
-        server_name wiki.shileizcc.com;
+        server_name wiki.shileizcc.com www.shileizcc.com;
 
         location  / {
             
