@@ -40,14 +40,14 @@ data:
     }
         
   wiki.conf: |-
-    upstream wiki {
-        zone upstrean-wiki 64k;
-        server  confluence.default.svc.cluster.local service=_http._tcp resolve;
-    }
-    upstream wiki_synchrony {
-        zone upstrean-wiki-synchrony 64k;
-        server  confluence.default.svc.cluster.local service=_synchrony._tcp resolve;
-    }
+    # upstream wiki {
+    #     zone upstrean-wiki 64k;
+    #     server  confluence.default.svc.cluster.local service=_http._tcp resolve;
+    # }
+    # upstream wiki_synchrony {
+    #     zone upstrean-wiki-synchrony 64k;
+    #     server  confluence.default.svc.cluster.local service=_synchrony._tcp resolve;
+    # }
 
     ## wiki
     server  {
