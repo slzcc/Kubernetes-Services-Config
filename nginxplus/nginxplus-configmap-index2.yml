@@ -76,7 +76,7 @@ data:
             proxy_set_header X-Forwarded-Server $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header Connection "";
-            proxy_pass http://wiki/confluence;
+            proxy_pass http://10.0.16.7:8090/confluence;
             proxy_connect_timeout 1800;
             proxy_send_timeout 1800;
             proxy_read_timeout 1800;
@@ -94,7 +94,7 @@ data:
             proxy_set_header X-Forwarded-Host $host;
             proxy_set_header X-Forwarded-Server $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_pass http://wiki_synchrony/synchrony;
+            proxy_pass http://10.0.16.7:8090/synchrony;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "Upgrade";
         }
