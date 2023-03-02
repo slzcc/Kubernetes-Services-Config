@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: robot-hotstone-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "robot.hotstone.io"
+  #   tls:
+  #     httpsRedirect: true
+  # - port:
+  #     number: 443
+  #     name: https
+  #     protocol: HTTPS
+  #   hosts:
+  #   - "robot.hotstone.io"
+  #   tls:
+  #     mode: SIMPLE
+  #     credentialName: hotstoneio-tls
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: robot-hotstone-virtualservice
+spec:
+  hosts:
+  - robot.hotstone.io
+  gateways:
+  - istio-system/robot-hotstone-gateway
+  http:
+  - route:
+    - destination:
+        host: robot.default.svc.cluster.local
+        subset: v1
+            
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: robot-hotstone-destinationrule
+spec:
+  host: robot.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+
+# set ingressgateway externalTrafficPolicy: Local 
