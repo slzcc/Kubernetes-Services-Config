@@ -13,17 +13,17 @@ spec:
       protocol: HTTP
     hosts:
     - "robot.hotstone.com.cn"
-  #   tls:
-  #     httpsRedirect: true
-  # - port:
-  #     number: 443
-  #     name: https
-  #     protocol: HTTPS
-  #   hosts:
-  #   - "robot.hotstone.com.cn"
-  #   tls:
-  #     mode: SIMPLE
-  #     credentialName: hotstoneio-tls
+    tls:
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "robot.hotstone.com.cn"
+    tls:
+      mode: SIMPLE
+      credentialName: hotstone-tls
 
 ---
 apiVersion: networking.istio.io/v1alpha3
