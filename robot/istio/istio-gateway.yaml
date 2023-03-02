@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "robot.hotstone.io"
+    - "robot.hotstone.com.cn"
   #   tls:
   #     httpsRedirect: true
   # - port:
@@ -20,7 +20,7 @@ spec:
   #     name: https
   #     protocol: HTTPS
   #   hosts:
-  #   - "robot.hotstone.io"
+  #   - "robot.hotstone.com.cn"
   #   tls:
   #     mode: SIMPLE
   #     credentialName: hotstoneio-tls
@@ -32,7 +32,7 @@ metadata:
   name: robot-hotstone-virtualservice
 spec:
   hosts:
-  - robot.hotstone.io
+  - robot.hotstone.com.cn
   gateways:
   - istio-system/robot-hotstone-gateway
   http:
