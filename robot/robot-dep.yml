@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: robot
+  namespace: default
+  labels:
+    app: robot
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: robot
+  template:
+    metadata:
+      labels:
+        app: robot
+        version: v1
+    spec:
+      containers:
+      - name: robot
+        image: python:3.9
+        command:
+        - sleep
+        - "1236788990"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - mountPath: "/data"
+          name: data
+        - mountPath: /usr/share/zoneinfo
+          name: usr-local-timezone
+          readOnly: true
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+      volumes:
+      - name: usr-local-timezone
+        hostPath:
+          path: /usr/share/zoneinfo
+          type: DirectoryOrCreate
+      - hostPath:
+          path: "/root/robot"
+        name: data
